@@ -3,7 +3,7 @@
 namespace Drupal\tabt_sync\Commands;
 
 use Drupal\tabt_sync\DataFetcher\VenueDataFetcher;
-use Drupal\tabt_sync\Event\Sync\syncVenueEvent;
+use Drupal\tabt_sync\Event\Sync\SyncVenueEvent;
 use Drupal\tabt_sync\Event\Truncate\TruncateVenuesEvent;
 use Drupal\tabt_sync\Model\Venue;
 use Drush\Commands\DrushCommands;

@@ -8,6 +8,10 @@ use Drupal\tabt\Util\Enum\Tabt;
 
 final class TeamRepository extends RepositoryBase implements TeamRepositoryInterface {
 
+  protected function entityTypeId(): string {
+    return Tabt::TEAM;
+  }
+
   public function getTeamByTeamId(string $id): ?TeamInterface {
     $query = $this->baseEntityQuery();
     $query->condition('team_id', $id);
@@ -24,12 +28,8 @@ final class TeamRepository extends RepositoryBase implements TeamRepositoryInter
     return !empty($results) ? Team::load(reset($results)) : NULL;
   }
 
-  protected function entityTypeId(): string {
-    return Tabt::TEAM;
-  }
-
   public function listTeams(): array {
-    return [];
+    return Team::loadMultiple();
   }
 
 }

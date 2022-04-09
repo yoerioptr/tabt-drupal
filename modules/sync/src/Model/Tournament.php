@@ -2,15 +2,13 @@
 
 namespace Drupal\tabt_sync\Model;
 
-use Drupal\Core\Datetime\DrupalDateTime;
-
 final class Tournament extends SyncableItemBase {
 
   private string $matchId;
 
   private string $weekName;
 
-  private DrupalDateTime $date;
+  private ?int $date;
 
   private string $homeTeam;
 
@@ -22,35 +20,51 @@ final class Tournament extends SyncableItemBase {
 
   private bool $awayForfeited;
 
-  private int $division_id;
+  private int $divisionId;
+
+  private string $homeWithdrawn;
+
+  private string $awayWithdrawn;
+
+  private string $score;
+
+  private ?string $venue;
 
   public function __construct(
     string $matchId,
     string $weekName,
-    DrupalDateTime $date,
+    ?\DateTime $date,
     string $homeTeam,
     string $awayTeam,
     ?string $homeClub,
     bool $homeForfeited,
     bool $awayForfeited,
-    int $division_id
+    string $homeWithdrawn,
+    string $awayWithdrawn,
+    int $divisionId,
+    string $score,
+    ?string $venue
   ) {
     $this->matchId = $matchId;
     $this->weekName = $weekName;
-    $this->date = $date;
+    $this->date = !is_null($date) ? $date->getTimestamp() : NULL;
     $this->homeTeam = $homeTeam;
     $this->awayTeam = $awayTeam;
     $this->homeClub = $homeClub;
     $this->homeForfeited = $homeForfeited;
     $this->awayForfeited = $awayForfeited;
-    $this->division_id = $division_id;
+    $this->divisionId = $divisionId;
+    $this->homeWithdrawn = $homeWithdrawn;
+    $this->awayWithdrawn = $awayWithdrawn;
+    $this->score = $score;
+    $this->venue = $venue;
   }
 
   public function getAwayTeam(): string {
     return $this->awayTeam;
   }
 
-  public function getDate(): DrupalDateTime {
+  public function getDate(): ?int {
     return $this->date;
   }
 
@@ -79,7 +93,23 @@ final class Tournament extends SyncableItemBase {
   }
 
   public function getDivisionId(): int {
-    return $this->division_id;
+    return $this->divisionId;
+  }
+
+  public function getAwayWithdrawn(): string {
+    return $this->awayWithdrawn;
+  }
+
+  public function getHomeWithdrawn(): string {
+    return $this->homeWithdrawn;
+  }
+
+  public function getScore(): string {
+    return $this->score;
+  }
+
+  public function getVenue(): ?string {
+    return $this->venue;
   }
 
 }

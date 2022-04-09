@@ -91,10 +91,13 @@ services:
       - '@tabt.repository.tournament'
       - '@tabt.repository.team'
       - '@tabt.repository.division'
+      - '@tabt.repository.venue'
     tags:
       - { name: event_subscriber }
   tabt_sync.event_subscriber.sync.venue:
     class: Drupal\tabt_sync\Subscriber\Sync\SyncVenueEventSubscriber
+    arguments:
+      - '@tabt.repository.venue'
     tags:
       - { name: event_subscriber }
 

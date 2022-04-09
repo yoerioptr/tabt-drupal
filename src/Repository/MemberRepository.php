@@ -21,7 +21,7 @@ final class MemberRepository extends RepositoryBase implements MemberRepositoryI
   }
 
   public function lisMembers(): array {
-    return [];
+    return Member::loadMultiple();
   }
 
 }

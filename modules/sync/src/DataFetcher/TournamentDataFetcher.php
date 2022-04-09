@@ -2,7 +2,6 @@
 
 namespace Drupal\tabt_sync\DataFetcher;
 
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\tabt\Context\ClubContext;
 use Drupal\tabt_sync\Model\Tournament;
 use Yoerioptr\TabtApiClient\Entries\TeamMatchesEntry;
@@ -31,13 +30,17 @@ final class TournamentDataFetcher implements DataFetcherInterface {
       return new Tournament(
         $match->getMatchId(),
         $match->getWeekName(),
-        DrupalDateTime::createFromDateTime($match->getDateTime()),
+        $match->getDateTime(),
         $match->getHomeTeam(),
         $match->getAwayTeam(),
         $match->getVenueClub(),
         $match->isHomeForfeited(),
         $match->isAwayForfeited(),
-        $match->getDivisionId()
+        $match->getHomeWithdrawn(),
+        $match->getAwayWithdrawn(),
+        $match->getDivisionId(),
+        $match->getScore(),
+        !is_null($match->getVenueEntry()) ? $match->getVenueEntry()->getName() : NULL
       );
     }, $match_entries);
   }

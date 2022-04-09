@@ -23,10 +23,7 @@ final class TournamentRepository extends RepositoryBase implements TournamentRep
   }
 
   public function listTournaments(): array {
-    $query = $this->baseEntityQuery();
-    $results = $query->execute();
-
-    return Tournament::loadMultiple($results);
+    return Tournament::loadMultiple();
   }
 
   public function listTournamentsByDivision(DivisionInterface $division): array {
