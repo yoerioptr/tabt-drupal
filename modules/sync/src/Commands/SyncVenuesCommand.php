@@ -7,6 +7,7 @@ use Drupal\tabt_sync\Event\Sync\syncVenueEvent;
 use Drupal\tabt_sync\Event\Truncate\TruncateVenuesEvent;
 use Drupal\tabt_sync\Model\Venue;
 use Drush\Commands\DrushCommands;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SyncVenuesCommand extends DrushCommands {
@@ -28,17 +29,26 @@ final class SyncVenuesCommand extends DrushCommands {
    * @command tabt:sync:venue
    */
   public function sync(): void {
+    $this->writeln('Fetching API data');
     $venues = $this->dataFetcher->listItemsToSync();
+
+    $this->writeln('Processing API data');
+    $progress_bar = new ProgressBar($this->output, count($venues));
+    $progress_bar->start();
 
     array_walk($venues, function (Venue $venue): void {
       $this->eventDispatcher->dispatch(new SyncVenueEvent($venue));
     });
+
+    $progress_bar->finish();
+    $this->writeln('');
   }
 
   /**
    * @command tabt:truncate:venue
    */
   public function truncate(): void {
+    // TODO: Confirm action
     $this->eventDispatcher->dispatch(new TruncateVenuesEvent());
   }
 

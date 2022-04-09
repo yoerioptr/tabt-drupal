@@ -7,6 +7,7 @@ use Drupal\tabt_sync\Event\Sync\SyncTeamEvent;
 use Drupal\tabt_sync\Event\Truncate\TruncateTeamsEvent;
 use Drupal\tabt_sync\Model\Team;
 use Drush\Commands\DrushCommands;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SyncTeamsCommand extends DrushCommands {
@@ -28,17 +29,26 @@ final class SyncTeamsCommand extends DrushCommands {
    * @command tabt:sync:team
    */
   public function sync(): void {
+    $this->writeln('Fetching API data');
     $teams = $this->dataFetcher->listItemsToSync();
+
+    $this->writeln('Processing API data');
+    $progress_bar = new ProgressBar($this->output, count($teams));
+    $progress_bar->start();
 
     array_walk($teams, function (Team $team): void {
       $this->eventDispatcher->dispatch(new SyncTeamEvent($team));
     });
+
+    $progress_bar->finish();
+    $this->writeln('');
   }
 
   /**
    * @command tabt:truncate:team
    */
   public function truncate(): void {
+    // TODO: Confirm action
     $this->eventDispatcher->dispatch(new TruncateTeamsEvent());
   }
 

@@ -7,6 +7,7 @@ use Drupal\tabt_sync\Event\Sync\SyncMemberEvent;
 use Drupal\tabt_sync\Event\Truncate\TruncateMembersEvent;
 use Drupal\tabt_sync\Model\Member;
 use Drush\Commands\DrushCommands;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SyncMembersCommand extends DrushCommands {
@@ -28,17 +29,27 @@ final class SyncMembersCommand extends DrushCommands {
    * @command tabt:sync:member
    */
   public function sync(): void {
+    $this->writeln('Fetching API data');
     $members = $this->dataFetcher->listItemsToSync();
 
-    array_walk($members, function (Member $member): void {
+    $this->writeln('Processing API data');
+    $progress_bar = new ProgressBar($this->output, count($members));
+
+    $progress_bar->start();
+    array_walk($members, function (Member $member) use ($progress_bar): void {
       $this->eventDispatcher->dispatch(new SyncMemberEvent($member));
+      $progress_bar->advance();
     });
+
+    $progress_bar->finish();
+    $this->writeln('');
   }
 
   /**
    * @command tabt:truncate:member
    */
   public function truncate(): void {
+    // TODO: Confirm action
     $this->eventDispatcher->dispatch(new TruncateMembersEvent());
   }
 
