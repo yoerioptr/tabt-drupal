@@ -1,0 +1,10 @@
+system.tabt:
+  title: 'Tabt'
+  parent: system.admin_config
+  route_name: tabt
+
+system.tabt.settings:
+  title: 'Settings'
+  parent: system.tabt
+  description: ''
+  route_name: tabt.settings_form

@@ -1,0 +1,62 @@
+services:
+  # Contexts
+  tabt.context.club:
+    class: Drupal\tabt\Context\ClubContext
+    arguments:
+      - '@config.factory'
+
+  # Repositories
+  tabt.repository.division:
+    class: Drupal\tabt\Repository\DivisionRepository
+    arguments:
+      - '@entity_type.manager'
+  tabt.repository.member:
+    class: Drupal\tabt\Repository\MemberRepository
+    arguments:
+      - '@entity_type.manager'
+  tabt.repository.team:
+    class: Drupal\tabt\Repository\TeamRepository
+    arguments:
+      - '@entity_type.manager'
+  tabt.repository.tournament:
+    class: Drupal\tabt\Repository\TournamentRepository
+    arguments:
+      - '@entity_type.manager'
+  tabt.repository.venue:
+    class: Drupal\tabt\Repository\VenueRepository
+    arguments:
+      - '@entity_type.manager'
+
+  # TabT services
+  tabt:
+    class: Yoerioptr\TabtApiClient\Tabt
+    arguments:
+      - '@tabt.client'
+  tabt.client:
+    class: Yoerioptr\TabtApiClient\Client\Client
+
+  # TabT client repositories
+  tabt.repository.client.test:
+    class: Yoerioptr\TabtApiClient\Repository\TestRepository
+    arguments:
+      - '@tabt.client'
+  tabt.repository.client.season:
+    class: Yoerioptr\TabtApiClient\Repository\SeasonRepository
+    arguments:
+      - '@tabt.client'
+  tabt.repository.client.club:
+    class: Yoerioptr\TabtApiClient\Repository\ClubRepository
+    arguments:
+      - '@tabt.client'
+  tabt.repository.client.division:
+    class: Yoerioptr\TabtApiClient\Repository\DivisionRepository
+    arguments:
+      - '@tabt.client'
+  tabt.repository.client.match:
+    class: Yoerioptr\TabtApiClient\Repository\MatchRepository
+    arguments:
+      - '@tabt.client'
+  tabt.repository.client.member:
+    class: Yoerioptr\TabtApiClient\Repository\MemberRepository
+    arguments:
+      - '@tabt.client'

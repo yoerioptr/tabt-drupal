@@ -1,0 +1,7 @@
+name: 'Tabt API Synchronisation'
+type: module
+description: ''
+package: tabt
+core_version_requirement: ^9.0 || ^10
+dependencies:
+  - tabt:tabt

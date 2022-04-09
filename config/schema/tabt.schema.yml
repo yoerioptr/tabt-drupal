@@ -1,0 +1,7 @@
+tabt.settings:
+  type: config_object
+  label: 'TabT Settings'
+  mapping:
+    club:
+      type: string
+      label: 'Club'

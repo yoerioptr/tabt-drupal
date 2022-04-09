@@ -1,0 +1,17 @@
+{
+    "name": "drupal/tabt",
+    "description": "",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/tabt",
+    "support": {
+        "issues": "https://www.drupal.org/issues/project/tabt",
+        "source": "https://cgit.drupalcode.org/tabt"
+    },
+    "require": {
+        "php": ">=7.4",
+        "drupal/core": "^9.0 || ^10",
+        "yoerioptr/tabt-api-client": "^v2.0",
+        "ext-json": "*"
+    }
+}

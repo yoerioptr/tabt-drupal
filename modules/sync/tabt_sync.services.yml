@@ -1,0 +1,125 @@
+services:
+  # Data fetchers
+  tabt_sync.data_fetcher.division:
+    class: Drupal\tabt_sync\DataFetcher\DivisionDataFetcher
+    arguments:
+      - '@tabt.context.club'
+      - '@tabt.repository.client.match'
+      - '@tabt.repository.client.division'
+  tabt_sync.data_fetcher.member:
+    class: Drupal\tabt_sync\DataFetcher\MemberDataFetcher
+    arguments:
+      - '@tabt.context.club'
+      - '@tabt.repository.client.member'
+  tabt_sync.data_fetcher.team:
+    class: Drupal\tabt_sync\DataFetcher\TeamDataFetcher
+    arguments:
+      - '@tabt.context.club'
+      - '@tabt.repository.client.club'
+      - '@tabt.repository.client.match'
+  tabt_sync.data_fetcher.tournament:
+    class: Drupal\tabt_sync\DataFetcher\TournamentDataFetcher
+    arguments:
+      - '@tabt.context.club'
+      - '@tabt.repository.client.match'
+
+  # Drush commands
+  tabt_sync.drush_command.sync.division:
+    class: Drupal\tabt_sync\Commands\SyncDivisionsCommand
+    arguments:
+      - '@event_dispatcher'
+      - '@tabt_sync.data_fetcher.division'
+    tags:
+      - { name: drush.command }
+  tabt_sync.drush_command.sync.member:
+    class: Drupal\tabt_sync\Commands\SyncMembersCommand
+    arguments:
+      - '@event_dispatcher'
+      - '@tabt_sync.data_fetcher.member'
+    tags:
+      - { name: drush.command }
+  tabt_sync.drush_command.sync.team:
+    class: Drupal\tabt_sync\Commands\SyncTeamsCommand
+    arguments:
+      - '@event_dispatcher'
+      - '@tabt_sync.data_fetcher.team'
+    tags:
+      - { name: drush.command }
+  tabt_sync.drush_command.sync.tournament:
+    class: Drupal\tabt_sync\Commands\SyncTournamentsCommand
+    arguments:
+      - '@event_dispatcher'
+      - '@tabt_sync.data_fetcher.tournament'
+    tags:
+      - { name: drush.command }
+  tabt_sync.drush_command.sync.venue:
+    class: Drupal\tabt_sync\Commands\SyncVenuesCommand
+    arguments:
+      - '@event_dispatcher'
+      - '@tabt_sync.data_fetcher.tournament'
+    tags:
+      - { name: drush.command }
+
+  # Event subscribers
+  tabt_sync.event_subscriber.sync.division:
+    class: Drupal\tabt_sync\Subscriber\Sync\SyncDivisionEventSubscriber
+    arguments:
+      - '@tabt.repository.division'
+    tags:
+      - { name: event_subscriber }
+  tabt_sync.event_subscriber.sync.member:
+    class: Drupal\tabt_sync\Subscriber\Sync\SyncMemberEventSubscriber
+    arguments:
+      - '@tabt.repository.member'
+    tags:
+      - { name: event_subscriber }
+  tabt_sync.event_subscriber.sync.team:
+    class: Drupal\tabt_sync\Subscriber\Sync\SyncTeamEventSubscriber
+    arguments:
+      - '@tabt.repository.team'
+      - '@tabt.repository.division'
+    tags:
+      - { name: event_subscriber }
+  tabt_sync.event_subscriber.sync.tournament:
+    class: Drupal\tabt_sync\Subscriber\Sync\SyncTournamentEventSubscriber
+    arguments:
+      - '@tabt.repository.tournament'
+      - '@tabt.repository.team'
+      - '@tabt.repository.division'
+    tags:
+      - { name: event_subscriber }
+  tabt_sync.event_subscriber.sync.venue:
+    class: Drupal\tabt_sync\Subscriber\Sync\SyncVenueEventSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  tabt_sync.event_subscriber.truncate.division:
+    class: Drupal\tabt_sync\Subscriber\Truncate\TruncateDivisionsEventSubscriber
+    arguments:
+      - '@tabt.repository.division'
+    tags:
+      - { name: event_subscriber }
+  tabt_sync.event_subscriber.truncate.member:
+    class: Drupal\tabt_sync\Subscriber\Truncate\TruncateMembersEventSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@tabt.repository.member'
+  tabt_sync.event_subscriber.truncate.team:
+    class: Drupal\tabt_sync\Subscriber\Truncate\TruncateTeamsEventSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@tabt.repository.team'
+  tabt_sync.event_subscriber.truncate.tournament:
+    class: Drupal\tabt_sync\Subscriber\Truncate\TruncateTournamentsEventSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@tabt.repository.tournament'
+  tabt_sync.event_subscriber.truncate.venue:
+    class: Drupal\tabt_sync\Subscriber\Truncate\TruncateVenuesEventSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@tabt.repository.venue'

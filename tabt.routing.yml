@@ -1,0 +1,15 @@
+tabt:
+  path: '/admin/config/tabt'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Tabt'
+  requirements:
+    _permission: 'administer tabt settings'
+
+tabt.settings_form:
+  path: '/admin/config/tabt/settings'
+  defaults:
+    _form: Drupal\tabt\Form\TabtSettingsForm
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer tabt settings'
