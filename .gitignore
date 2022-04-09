@@ -1,3 +1,7 @@
 /vendor/
 
 composer.lock
+
+grumphp.yml
+grumphp.yml.dist
+phpstan.neon
