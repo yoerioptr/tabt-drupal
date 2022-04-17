@@ -13,12 +13,16 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   label = @Translation("Tournament"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TournamentListBuilder",
  *   },
  *   base_table = "tabt_tournament",
  *   entity_keys = {
  *     "id" = "tid",
  *     "label" = "title",
  *     "uuid" = "uuid",
+ *   },
+ *   links = {
+ *     "collection" = "/tabt/tournament/list",
  *   }
  * )
  */
@@ -99,15 +103,19 @@ final class Tournament extends TabtEntityBase implements TournamentInterface {
   }
 
   public function getDate(): ?DrupalDateTime {
-    return $this->get('date')->value;
+    $timestamp = $this->get('date')->value;
+
+    return !empty($timestamp)
+      ? DrupalDateTime::createFromTimestamp($timestamp)
+      : NULL;
   }
 
   public function getHomeTeam(): ?TeamInterface {
-    return $this->get('home_team')->entity;
+    return Team::load($this->get('home_team')->target_id);
   }
 
   public function getAwayTeam(): ?TeamInterface {
-    return $this->get('home_team')->entity;
+    return Team::load($this->get('away_team')->target_id);
   }
 
   public function getScore(): ?string {

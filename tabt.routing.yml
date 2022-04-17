@@ -13,3 +13,35 @@ tabt.settings_form:
     _title: 'Settings'
   requirements:
     _permission: 'administer tabt settings'
+
+entity.tabt.division.collection:
+  path: '/tabt/division/list'
+  defaults:
+    _entity_list: 'tabt_division'
+    _title: 'Divisions'
+  requirements:
+    _permission: 'access tabt overview'
+
+entity.tabt.member.collection:
+  path: '/tabt/member/list'
+  defaults:
+    _entity_list: 'tabt_member'
+    _title: 'Members'
+  requirements:
+    _permission: 'access tabt overview'
+
+entity.tabt.team.collection:
+  path: '/tabt/team/list'
+  defaults:
+    _entity_list: 'tabt_team'
+    _title: 'Teams'
+  requirements:
+    _permission: 'access tabt overview'
+
+entity.tabt.tournament.collection:
+  path: '/tabt/tournament/list'
+  defaults:
+    _entity_list: 'tabt_tournament'
+    _title: 'Tournaments'
+  requirements:
+    _permission: 'access tabt overview'

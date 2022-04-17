@@ -6,6 +6,6 @@ use Drupal\Core\Entity\ContentEntityInterface;
 
 interface TeamInterface extends ContentEntityInterface {
 
-  //
-  
+  public function getTeamId(): string;
+
 }

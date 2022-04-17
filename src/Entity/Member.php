@@ -11,13 +11,17 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   label = @Translation("Member"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\MemberListBuilder",
  *   },
  *   base_table = "tabt_member",
  *   entity_keys = {
  *     "id" = "tid",
  *     "label" = "title",
  *     "uuid" = "uuid",
- *   }
+ *   },
+ *   links = {
+ *     "collection" = "/tabt/member/list"
+ *   },
  * )
  */
 final class Member extends TabtEntityBase implements MemberInterface {

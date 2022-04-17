@@ -11,12 +11,16 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   label = @Translation("Division"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\DivisionListBuilder",
  *   },
  *   base_table = "tabt_division",
  *   entity_keys = {
  *     "id" = "tid",
  *     "label" = "title",
  *     "uuid" = "uuid",
+ *   },
+ *   links = {
+ *     "collection" = "/tabt/division/list",
  *   }
  * )
  */

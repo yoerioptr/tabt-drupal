@@ -12,12 +12,16 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   label = @Translation("Team"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TeamListBuilder",
  *   },
  *   base_table = "tabt_team",
  *   entity_keys = {
  *     "id" = "tid",
  *     "label" = "title",
  *     "uuid" = "uuid",
+ *   },
+ *   links = {
+ *     "collection" = "/tabt/team/list",
  *   }
  * )
  */
@@ -41,6 +45,10 @@ final class Team extends TabtEntityBase implements TeamInterface {
       ->setDescription(t("Flag that indicates if the team is external"));
 
     return $fields;
+  }
+
+  public function getTeamId(): string {
+    return $this->get('team_id')->value;
   }
 
 }
