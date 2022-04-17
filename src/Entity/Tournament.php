@@ -16,22 +16,9 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   },
  *   base_table = "tabt_tournament",
  *   entity_keys = {
- *     "away_forfeited" = "away_forfeited",
- *     "away_team" = "away_team",
- *     "away_withdrawn" = "away_withdrawn",
- *     "date" = "date",
- *     "division" = "division",
- *     "home_forfeited" = "home_forfeited",
- *     "home_team" = "home_team",
- *     "home_withdrawn" = "home_withdrawn",
  *     "id" = "tid",
  *     "label" = "title",
- *     "score" = "score",
- *     "tournament_id" = "tournament_id",
- *     "tournament_unique_id" = "tournament_unique_id",
  *     "uuid" = "uuid",
- *     "venue" = "venue",
- *     "week_name" = "week_name",
  *   }
  * )
  */

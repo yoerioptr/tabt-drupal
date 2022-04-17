@@ -14,10 +14,9 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  *   base_table = "tabt_division",
  *   entity_keys = {
- *     "division_category" = "division_category",
- *     "division_id" = "division_id",
  *     "id" = "tid",
  *     "label" = "title",
+ *     "uuid" = "uuid",
  *   }
  * )
  */

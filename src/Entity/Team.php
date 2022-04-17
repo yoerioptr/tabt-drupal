@@ -15,11 +15,9 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   },
  *   base_table = "tabt_team",
  *   entity_keys = {
- *     "division" = "division",
  *     "id" = "tid",
  *     "label" = "title",
- *     "team_id" = "team_id",
- *     "external" = "external",
+ *     "uuid" = "uuid",
  *   }
  * )
  */

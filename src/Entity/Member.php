@@ -15,13 +15,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   base_table = "tabt_member",
  *   entity_keys = {
  *     "id" = "tid",
- *     "first_name" = "first_name",
  *     "label" = "title",
- *     "last_name" = "last_name",
- *     "postition" = "position",
- *     "ranking" = "ranking",
- *     "ranking_index" = "ranking_index",
- *     "unique_index" = "unique_index",
  *     "uuid" = "uuid",
  *   }
  * )
