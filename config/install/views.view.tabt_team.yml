@@ -2,6 +2,8 @@ uuid: 69f14bd7-5e43-446c-bb92-6730f9708ad2
 langcode: en
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
     - tabt
     - user
@@ -148,15 +150,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        division:
-          id: division
-          table: tabt_team
-          field: division
-          relationship: none
+        title:
+          id: title
+          table: tabt_division
+          field: title
+          relationship: division
           group_type: group
           admin_label: ''
-          entity_type: tabt_team
-          entity_field: division
+          entity_type: tabt_division
+          entity_field: title
           plugin_id: field
           label: Division
           exclude: false
@@ -199,11 +201,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -361,6 +362,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: combine
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: Contains
+            description: ''
+            use_operator: false
+            operator: combine_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: combine
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            team_id: team_id
+            title_1: title_1
+            title: title
       style:
         type: table
         options:
@@ -415,7 +462,18 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        division:
+          id: division
+          table: tabt_team
+          field: division
+          relationship: none
+          group_type: group
+          admin_label: Division
+          entity_type: tabt_team
+          entity_field: division
+          plugin_id: standard
+          required: false
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -424,6 +482,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user.permissions
       tags: {  }
@@ -435,11 +494,21 @@ display:
     display_options:
       display_extenders: {  }
       path: admin/tabt/team
+      menu:
+        type: normal
+        title: Team
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: system.tabt
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user.permissions
       tags: {  }

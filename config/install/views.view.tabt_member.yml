@@ -2,6 +2,8 @@ uuid: eb26b8ad-4f17-4c7b-b463-05cc8fc2b531
 langcode: en
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
     - tabt
     - user
@@ -452,7 +454,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: Title
+            label: Contains
             description: ''
             use_operator: false
             operator: combine_op
@@ -581,13 +583,13 @@ display:
       display_extenders: {  }
       path: admin/tabt/member
       menu:
-        type: none
+        type: normal
         title: Member
         description: ''
         weight: 0
         expanded: false
-        menu_name: main
-        parent: ''
+        menu_name: admin
+        parent: system.tabt
         context: '0'
       tab_options:
         type: normal

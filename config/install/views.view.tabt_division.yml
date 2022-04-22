@@ -2,6 +2,8 @@ uuid: 99671c0f-96e5-446a-af79-cf6b865bb572
 langcode: en
 status: true
 dependencies:
+  config:
+    - system.menu.admin
   module:
     - tabt
     - user
@@ -258,7 +260,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: Title
+            label: Contains
             description: ''
             use_operator: false
             operator: combine_op
@@ -357,13 +359,13 @@ display:
       display_extenders: {  }
       path: admin/tabt/division
       menu:
-        type: none
+        type: normal
         title: Division
         description: ''
         weight: 0
         expanded: false
-        menu_name: main
-        parent: ''
+        menu_name: admin
+        parent: system.tabt
         context: '0'
       tab_options:
         type: normal
