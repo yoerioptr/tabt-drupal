@@ -417,7 +417,8 @@ display:
           columns:
             team_id: team_id
             title_1: title_1
-            division: division
+            title: title
+            operations: operations
           default: '-1'
           info:
             team_id:
@@ -434,9 +435,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            division:
+            title:
               sortable: true
               default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
               align: ''
               separator: ''
               empty_column: false

@@ -243,7 +243,22 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        title:
+          id: title
+          table: tabt_division
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: tabt_division
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         combine:
@@ -300,7 +315,8 @@ display:
           columns:
             division_id: division_id
             title_1: title_1
-          default: title_1
+            operations: operations
+          default: '-1'
           info:
             division_id:
               sortable: true
@@ -312,6 +328,11 @@ display:
             title_1:
               sortable: true
               default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            operations:
               align: ''
               separator: ''
               empty_column: false
