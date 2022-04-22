@@ -8,6 +8,22 @@ use Drupal\Core\Field\BaseFieldDefinition;
 
 abstract class TabtEntityBase extends ContentEntityBase implements TabtEntityInterface {
 
+  public function getId(): int {
+    return $this->get('tid')->value;
+  }
+
+  public function getUuid(): string {
+    return $this->get('uuid')->value;
+  }
+
+  public function label(): string {
+    return $this->get('title')->value;
+  }
+
+  public function getRawData(): string {
+    return $this->get('raw_data')->value;
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields['tid'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
@@ -30,18 +46,6 @@ abstract class TabtEntityBase extends ContentEntityBase implements TabtEntityInt
       ->setReadOnly(TRUE);
 
     return $fields;
-  }
-
-  public function getId(): int {
-    return $this->get('tid')->value;
-  }
-
-  public function getUuid(): string {
-    return $this->get('uuid')->value;
-  }
-
-  public function label(): string {
-    return $this->get('title')->value;
   }
 
 }

@@ -8,4 +8,6 @@ interface TabtEntityInterface extends ContentEntityInterface {
 
   public function getId(): int;
 
+  public function getRawData();
+
 }

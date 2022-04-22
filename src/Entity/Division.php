@@ -26,6 +26,18 @@ use Drupal\Core\Field\BaseFieldDefinition;
  */
 final class Division extends TabtEntityBase implements DivisionInterface {
 
+  public function getDivisionId(): int {
+    return $this->get('division_id')->value;
+  }
+
+  public function getDivisionCategory(): int {
+    return $this->get('division_category')->value;
+  }
+
+  public function getDivisionName(): string {
+    return $this->get('title')->value;
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -38,18 +50,6 @@ final class Division extends TabtEntityBase implements DivisionInterface {
       ->setDescription(t("The division's ID."));
 
     return $fields;
-  }
-
-  public function getDivisionId(): int {
-    return $this->get('division_id')->value;
-  }
-
-  public function getDivisionCategory(): int {
-    return $this->get('division_category')->value;
-  }
-
-  public function getDivisionName(): string {
-    return $this->get('title')->value;
   }
 
 }

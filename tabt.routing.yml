@@ -1,4 +1,4 @@
-tabt:
+tabt.config:
   path: '/admin/config/tabt'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
@@ -6,7 +6,7 @@ tabt:
   requirements:
     _permission: 'administer tabt settings'
 
-tabt.settings_form:
+tabt.config.settings_form:
   path: '/admin/config/tabt/settings'
   defaults:
     _form: Drupal\tabt\Form\TabtSettingsForm
@@ -14,8 +14,16 @@ tabt.settings_form:
   requirements:
     _permission: 'administer tabt settings'
 
+tabt:
+  path: '/admin/tabt'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Tabt'
+  requirements:
+    _permission: 'administer tabt settings'
+
 entity.tabt.division.collection:
-  path: '/admin/tabt/division/list'
+  path: '/admin/tabt/division'
   defaults:
     _entity_list: 'tabt_division'
     _title: 'Divisions'
@@ -23,7 +31,7 @@ entity.tabt.division.collection:
     _permission: 'access tabt overview'
 
 entity.tabt.member.collection:
-  path: '/admin/tabt/member/list'
+  path: '/admin/tabt/member'
   defaults:
     _entity_list: 'tabt_member'
     _title: 'Members'
@@ -31,7 +39,7 @@ entity.tabt.member.collection:
     _permission: 'access tabt overview'
 
 entity.tabt.team.collection:
-  path: '/admin/tabt/team/list'
+  path: '/admin/tabt/team'
   defaults:
     _entity_list: 'tabt_team'
     _title: 'Teams'
@@ -39,7 +47,7 @@ entity.tabt.team.collection:
     _permission: 'access tabt overview'
 
 entity.tabt.tournament.collection:
-  path: '/admin/tabt/tournament/list'
+  path: '/admin/tabt/tournament'
   defaults:
     _entity_list: 'tabt_tournament'
     _title: 'Tournaments'

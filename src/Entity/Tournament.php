@@ -28,68 +28,6 @@ use Drupal\tabt\Util\Enum\Tabt;
  */
 final class Tournament extends TabtEntityBase implements TournamentInterface {
 
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
-    $fields = parent::baseFieldDefinitions($entity_type);
-
-    $fields['away_forfeited'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Away forfeited'))
-      ->setDescription(t('An indication of a forfeit by the visiting team.'));
-
-    $fields['away_team'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Away team'))
-      ->setDescription(t('A reference to the visiting team.'))
-      ->setTargetEntityTypeId(Tabt::TEAM)
-      ->setRequired(FALSE);
-
-    $fields['away_withdrawn'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Away withdrawn'))
-      ->setDescription(t('An indication of a withdrawal by the visiting team.'));
-
-    $fields['date'] = BaseFieldDefinition::create('timestamp')
-      ->setLabel(t('Date'))
-      ->setDescription(t('The date of the tournament.'))
-      ->setRequired(FALSE);
-
-    $fields['division'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Division'))
-      ->setDescription(t('The division of the tournament.'))
-      ->setTargetEntityTypeId(Tabt::DIVISION);
-
-    $fields['home_forfeited'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Away forfeited'))
-      ->setDescription(t('An indication of a forfeit by the home team.'));
-
-    $fields['home_team'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Home team'))
-      ->setDescription(t('A reference to the home team.'))
-      ->setTargetEntityTypeId(Tabt::TEAM)
-      ->setRequired(FALSE);
-
-    $fields['home_withdrawn'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Home withdrawn'))
-      ->setDescription(t('An indication of a withdrawal by the home team.'));
-
-    $fields['score'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Score'))
-      ->setDescription(t('The results of the tournament.'));
-
-    $fields['tournament_id'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('TabT tournament ID'))
-      ->setDescription(t('The TabT ID of the tournament.'));
-
-    $fields['venue'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Venue'))
-      ->setDescription(t('The venue of the tournament.'))
-      ->setTargetEntityTypeId(Tabt::VENUE)
-      ->setRequired(FALSE);
-
-    $fields['week_name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Week name'))
-      ->setDescription(t('The week name of the tournament.'));
-
-    return $fields;
-  }
-
   public function getTournamentId(): string {
     return $this->get('tournament_id')->value;
   }
@@ -111,11 +49,11 @@ final class Tournament extends TabtEntityBase implements TournamentInterface {
   }
 
   public function getHomeTeam(): ?TeamInterface {
-    return Team::load($this->get('home_team')->target_id);
+    return $this->get('home_team')->entity;
   }
 
   public function getAwayTeam(): ?TeamInterface {
-    return Team::load($this->get('away_team')->target_id);
+    return $this->get('away_team')->entity;
   }
 
   public function getScore(): ?string {
@@ -146,8 +84,70 @@ final class Tournament extends TabtEntityBase implements TournamentInterface {
     return $this->get('away_withdrawn')->value;
   }
 
-  public function getRawData(): array {
-    return json_decode($this->get('raw_data')->value, TRUE);
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
+    $fields = parent::baseFieldDefinitions($entity_type);
+
+    $fields['away_forfeited'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Away forfeited'))
+      ->setDescription(t('An indication of a forfeit by the visiting team.'));
+
+    $fields['away_team'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Away team'))
+      ->setDescription(t('A reference to the visiting team.'))
+      ->setTargetEntityTypeId(Tabt::TEAM)
+      ->setSetting('target_type', Tabt::TEAM)
+      ->setSetting('handler', 'default');
+
+    $fields['away_withdrawn'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Away withdrawn'))
+      ->setDescription(t('An indication of a withdrawal by the visiting team.'));
+
+    $fields['date'] = BaseFieldDefinition::create('timestamp')
+      ->setLabel(t('Date'))
+      ->setDescription(t('The date of the tournament.'));
+
+    $fields['division'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Division'))
+      ->setDescription(t('The division of the tournament.'))
+      ->setTargetEntityTypeId(Tabt::DIVISION)
+      ->setSetting('target_type', Tabt::DIVISION)
+      ->setSetting('handler', 'default');
+
+    $fields['home_forfeited'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Away forfeited'))
+      ->setDescription(t('An indication of a forfeit by the home team.'));
+
+    $fields['home_team'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Home team'))
+      ->setDescription(t('A reference to the home team.'))
+      ->setTargetEntityTypeId(Tabt::TEAM)
+      ->setSetting('target_type', Tabt::TEAM)
+      ->setSetting('handler', 'default');
+
+    $fields['home_withdrawn'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Home withdrawn'))
+      ->setDescription(t('An indication of a withdrawal by the home team.'));
+
+    $fields['score'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Score'))
+      ->setDescription(t('The results of the tournament.'));
+
+    $fields['tournament_id'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('TabT tournament ID'))
+      ->setDescription(t('The TabT ID of the tournament.'));
+
+    $fields['venue'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Venue'))
+      ->setDescription(t('The venue of the tournament.'))
+      ->setTargetEntityTypeId(Tabt::VENUE)
+      ->setSetting('target_type', Tabt::VENUE)
+      ->setSetting('handler', 'default');
+
+    $fields['week_name'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Week name'))
+      ->setDescription(t('The week name of the tournament.'));
+
+    return $fields;
   }
 
 }

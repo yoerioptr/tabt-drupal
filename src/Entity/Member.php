@@ -26,6 +26,30 @@ use Drupal\Core\Field\BaseFieldDefinition;
  */
 final class Member extends TabtEntityBase implements MemberInterface {
 
+  public function getPosition(): int {
+    return $this->get('position')->value;
+  }
+
+  public function getUniqueIndex(): int {
+    return $this->get('unique_index')->value;
+  }
+
+  public function getRankingIndex(): int {
+    return $this->get('ranking_index')->value;
+  }
+
+  public function getFirstName(): string {
+    return $this->get('first_name')->value;
+  }
+
+  public function getLastName(): string {
+    return $this->get('last_name')->value;
+  }
+
+  public function getRanking(): string {
+    return $this->get('ranking')->value;
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -54,30 +78,6 @@ final class Member extends TabtEntityBase implements MemberInterface {
       ->setDescription(t("The member's unique index"));
 
     return $fields;
-  }
-
-  public function getPosition(): int {
-    return $this->get('position')->value;
-  }
-
-  public function getUniqueIndex(): int {
-    return $this->get('unique_index')->value;
-  }
-
-  public function getRankingIndex(): int {
-    return $this->get('ranking_index')->value;
-  }
-
-  public function getFirstName(): string {
-    return $this->get('first_name')->value;
-  }
-
-  public function getLastName(): string {
-    return $this->get('last_name')->value;
-  }
-
-  public function getRanking(): string {
-    return $this->get('ranking')->value;
   }
 
 }

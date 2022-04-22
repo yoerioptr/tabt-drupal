@@ -1,10 +1,15 @@
-system.tabt:
+system.tabt.config:
   title: 'Tabt'
   parent: system.admin_config
-  route_name: tabt
+  route_name: tabt.config
 
-system.tabt.settings:
+system.tabt.config.settings:
   title: 'Settings'
-  parent: system.tabt
+  parent: system.tabt.config
   description: ''
-  route_name: tabt.settings_form
+  route_name: tabt.config.settings_form
+
+system.tabt:
+  title: 'Tabt'
+  parent: system.admin
+  route_name: tabt

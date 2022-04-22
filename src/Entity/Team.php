@@ -27,6 +27,18 @@ use Drupal\tabt\Util\Enum\Tabt;
  */
 final class Team extends TabtEntityBase implements TeamInterface {
 
+  public function getTeamId(): string {
+    return $this->get('team_id')->value;
+  }
+
+  public function getDivision(): ?DivisionInterface {
+    return $this->get('division')->entity;
+  }
+
+  public function isExternal(): bool {
+    return $this->get('external')->value;
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
     $fields = parent::baseFieldDefinitions($entity_type);
 
@@ -34,7 +46,8 @@ final class Team extends TabtEntityBase implements TeamInterface {
       ->setLabel(t('Division'))
       ->setDescription(t("The division's category ID."))
       ->setTargetEntityTypeId(Tabt::DIVISION)
-      ->setRequired(FALSE);
+      ->setSetting('target_type', Tabt::DIVISION)
+      ->setSetting('handler', 'default');
 
     $fields['team_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Team id'))
@@ -45,10 +58,6 @@ final class Team extends TabtEntityBase implements TeamInterface {
       ->setDescription(t("Flag that indicates if the team is external"));
 
     return $fields;
-  }
-
-  public function getTeamId(): string {
-    return $this->get('team_id')->value;
   }
 
 }

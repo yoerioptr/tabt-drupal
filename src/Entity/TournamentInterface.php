@@ -33,6 +33,4 @@ interface TournamentInterface extends ContentEntityInterface {
 
   public function isAwayWithdrawn(): bool;
 
-  public function getRawData();
-
 }

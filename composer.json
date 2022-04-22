@@ -13,8 +13,5 @@
         "drupal/core": "^9.0 || ^10",
         "yoerioptr/tabt-api-client": "^v2.0",
         "ext-json": "*"
-    },
-    "require-dev": {
-        "nascom/grumphp-drupal": "^1.0"
     }
 }
