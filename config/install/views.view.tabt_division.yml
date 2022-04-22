@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - tabt
+    - user
 id: tabt_division
 label: Division
 module: views
@@ -233,8 +234,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access tabt overview'
       cache:
         type: tag
         options: {  }
@@ -344,6 +346,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }
   page_1:
     id: page_1
@@ -374,4 +377,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }

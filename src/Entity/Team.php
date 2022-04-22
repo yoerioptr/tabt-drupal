@@ -13,6 +13,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TeamListBuilder",
+ *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
  *   },
  *   base_table = "tabt_team",
  *   entity_keys = {

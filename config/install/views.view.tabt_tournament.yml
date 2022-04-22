@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - tabt
+    - user
 id: tabt_tournament
 label: Tournament
 module: views
@@ -491,28 +492,14 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access tabt overview'
       cache:
         type: tag
         options: {  }
       empty: {  }
       sorts:
-        division:
-          id: division
-          table: tabt_tournament
-          field: division
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: tabt_tournament
-          entity_field: division
-          plugin_id: standard
-          order: ASC
-          expose:
-            label: ''
-            field_identifier: ''
-          exposed: false
         week_name:
           id: week_name
           table: tabt_tournament
@@ -522,6 +509,21 @@ display:
           admin_label: ''
           entity_type: tabt_tournament
           entity_field: week_name
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        division:
+          id: division
+          table: tabt_tournament
+          field: division
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: tabt_tournament
+          entity_field: division
           plugin_id: standard
           order: ASC
           expose:
@@ -624,6 +626,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags: {  }
   page_1:
     id: page_1
@@ -639,4 +642,5 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags: {  }

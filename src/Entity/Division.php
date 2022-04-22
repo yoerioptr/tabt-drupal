@@ -12,6 +12,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
  *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\DivisionListBuilder",
+ *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
  *   },
  *   base_table = "tabt_division",
  *   entity_keys = {

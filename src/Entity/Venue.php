@@ -11,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   label = @Translation("Venue"),
  *   handlers = {
  *     "views_data" = "Drupal\views\EntityViewsData",
+ *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
  *   },
  *   base_table = "tabt_venue",
  *   entity_keys = {
