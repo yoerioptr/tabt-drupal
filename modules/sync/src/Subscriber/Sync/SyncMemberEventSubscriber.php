@@ -19,6 +19,7 @@ final class SyncMemberEventSubscriber implements EventSubscriberInterface {
     $source = $event->getMember();
 
     $member = $this->memberRepository->getMemberByUniqueIndex($source->getUniqueIndex()) ?? Member::create();
+    $member->setSyncing(TRUE);
     $member->set('title', "{$source->getUniqueIndex()} - {$source->getLastName()} {$source->getFirstName()}");
     $member->set('position', $source->getPosition());
     $member->set('unique_index', $source->getUniqueIndex());

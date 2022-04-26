@@ -31,3 +31,15 @@ function tabt_sync_form_tabt_settings_form_alter(array &$form): void {
     $eventDispatcher->dispatch(new TruncateVenuesEvent());
   };
 }
+
+/**
+ * Implements hook_views_data().
+ */
+function tabt_sync_views_data(): array {
+  $data['views']['tabt_sync'] = [
+    'title' => t('TabT sync'),
+    'area' => ['id' => 'tabt_sync'],
+  ];
+
+  return $data;
+}

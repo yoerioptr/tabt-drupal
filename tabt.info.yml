@@ -4,3 +4,5 @@ description: 'Core TabT table tennis manager functionality.'
 package: tabt
 core_version_requirement: ^9.0 || ^10
 configure: tabt.settings.form
+dependencies:
+  - tabt:tabt_sync

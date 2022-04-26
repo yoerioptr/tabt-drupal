@@ -63,7 +63,7 @@ final class SyncTournamentEventSubscriber implements EventSubscriberInterface {
   }
 
   private function buildScore(TournamentSource $tournament): string {
-    $score = preg_replace("/[^0-9-]/", "", (string) $tournament->getScore());
+    $score = preg_replace("/[^\d-]/", "", (string) $tournament->getScore());
     if (empty($score)) {
       $score = '0-0';
     }
