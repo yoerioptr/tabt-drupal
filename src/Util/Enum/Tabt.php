@@ -20,4 +20,8 @@ final class Tabt {
     ];
   }
 
+  public static function getConstants(): array {
+    return (new \ReflectionClass(self::class))->getConstants();
+  }
+
 }

@@ -1,0 +1,24 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\tabt\Util\Enum\Tabt;
+
+/**
+ * Implements hook_entity_operation().
+ */
+function tabt_entity_operation(EntityInterface $entity): array {
+  if (!in_array($entity->getEntityTypeId(), Tabt::getConstants())) {
+    return [];
+  }
+
+  $operations = [];
+
+  if ($entity->hasLinkTemplate('canonical')) {
+    $operations['view'] = [
+      'title' => t('View'),
+      'url' => $entity->toUrl(),
+    ];
+  }
+
+  return $operations;
+}

@@ -3,33 +3,28 @@
 namespace Drupal\tabt\Controller;
 
 use Drupal\Core\Entity\Controller\EntityViewController;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\tabt\Entity\TabtEntityInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class TabtViewController extends EntityViewController {
 
-  /**
-   * @param \Drupal\tabt\Entity\TabtEntityInterface $tabt
-   * @param string $view_mode
-   *
-   * @return array
-   */
-  public function view(EntityInterface $tabt, $view_mode = 'full'): array {
-    $page = $this->entityTypeManager
-      ->getViewBuilder($tabt->getEntityTypeId())
-      ->view($tabt, $view_mode);
-
-    $page['#pre_render'][] = [$this, 'buildTitle'];
-    $page['#entity_type'] = $tabt->getEntityTypeId();
-    $page["#{$page['#entity_type']}"] = $tabt;
-
-    $page['#cache']['contexts'][] = 'url.site';
-
-    return $page;
+  public function __invoke(Request $request, string $view_mode = 'full'): array {
+    return $this->view($this->extractEntityFromRequest($request), $view_mode);
   }
 
-  public function title(TabtEntityInterface $tabt): string {
-    return $tabt->label();
+  public function title(Request $request): string {
+    return $this->extractEntityFromRequest($request)->label();
+  }
+
+  private function extractEntityFromRequest(Request $request): TabtEntityInterface {
+    foreach ($request->attributes->all() as $param) {
+      if ($param instanceof TabtEntityInterface) {
+        return $param;
+      }
+    }
+
+    throw new NotFoundHttpException();
   }
 
 }
