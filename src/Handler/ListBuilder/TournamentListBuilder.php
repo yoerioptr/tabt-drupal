@@ -2,8 +2,8 @@
 
 namespace Drupal\tabt\Handler\ListBuilder;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\tabt\Entity\TournamentInterface;
 
 final class TournamentListBuilder extends EntityListBuilder {
 
@@ -18,7 +18,12 @@ final class TournamentListBuilder extends EntityListBuilder {
     ] + parent::buildHeader();
   }
 
-  public function buildRow(TournamentInterface $tournament): array {
+  /**
+   * @param \Drupal\tabt\Entity\TournamentInterface $tournament
+   *
+   * @return array
+   */
+  public function buildRow(EntityInterface $tournament): array {
     return [
       'week_name' => $tournament->getWeekName(),
       'tournament_id' => $tournament->getTournamentId(),

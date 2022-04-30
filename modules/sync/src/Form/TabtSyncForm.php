@@ -22,7 +22,7 @@ final class TabtSyncForm extends FormBase {
     $this->eventDispatcher = $eventDispatcher;
   }
 
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): TabtSyncForm {
     return new TabtSyncForm($container->get('event_dispatcher'));
   }
 

@@ -10,10 +10,8 @@ use Drupal\tabt\Event\TruncateMembersEvent;
 use Drupal\tabt\Event\TruncateTeamsEvent;
 use Drupal\tabt\Event\TruncateTournamentsEvent;
 use Drupal\tabt\Event\TruncateVenuesEvent;
-use Drupal\tabt\Repository\MemberRepositoryInterface;
 use Drupal\tabt\Util\Enum\Config;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Yoerioptr\TabtApiClient\Entries\ClubEntry;
 use Yoerioptr\TabtApiClient\Repository\ClubRepository;
 
@@ -23,23 +21,18 @@ final class TabtSettingsForm extends ConfigFormBase {
 
   private ClubRepository $clubRepository;
 
-  private EventDispatcherInterface $eventDispatcher;
-
   public function __construct(
     ConfigFactoryInterface $config_factory,
-    ClubRepository $clubRepository,
-    EventDispatcherInterface $eventDispatcher
+    ClubRepository $clubRepository
   ) {
     parent::__construct($config_factory);
     $this->clubRepository = $clubRepository;
-    $this->eventDispatcher = $eventDispatcher;
   }
 
   public static function create(ContainerInterface $container): self {
     return new TabtSettingsForm(
       $container->get('config.factory'),
-      $container->get('tabt.repository.client.club'),
-      $container->get('event_dispatcher')
+      $container->get('tabt.repository.client.club')
     );
   }
 

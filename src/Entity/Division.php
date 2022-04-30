@@ -10,9 +10,12 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   id = "tabt_division",
  *   label = @Translation("Division"),
  *   handlers = {
- *     "views_data" = "Drupal\views\EntityViewsData",
- *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\DivisionListBuilder",
  *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\DivisionListBuilder",
+ *     "route_provider" = {
+ *       "html" = "Drupal\tabt\Handler\RouteProvider\TabtRouteProvider",
+ *     },
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   base_table = "tabt_division",
  *   entity_keys = {
@@ -21,6 +24,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "uuid" = "uuid",
  *   },
  *   links = {
+ *     "canonical" = "/tabt/division/{tabt}",
  *     "collection" = "/tabt/division/list",
  *   }
  * )

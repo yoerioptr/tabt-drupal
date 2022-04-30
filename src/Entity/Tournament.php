@@ -12,9 +12,12 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   id = "tabt_tournament",
  *   label = @Translation("Tournament"),
  *   handlers = {
- *     "views_data" = "Drupal\views\EntityViewsData",
- *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TournamentListBuilder",
  *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TournamentListBuilder",
+ *     "route_provider" = {
+ *       "html" = "Drupal\tabt\Handler\RouteProvider\TabtRouteProvider",
+ *     },
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   base_table = "tabt_tournament",
  *   entity_keys = {
@@ -23,6 +26,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *     "uuid" = "uuid",
  *   },
  *   links = {
+ *     "canonical" = "/tabt/tournament/{tabt}",
  *     "collection" = "/tabt/tournament/list",
  *   }
  * )

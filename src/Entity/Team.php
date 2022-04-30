@@ -11,9 +11,13 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   id = "tabt_team",
  *   label = @Translation("Team"),
  *   handlers = {
- *     "views_data" = "Drupal\views\EntityViewsData",
- *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TeamListBuilder",
  *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
+ *     "list_builder" = "Drupal\tabt\Handler\ListBuilder\TeamListBuilder",
+ *     "route_provider" = {
+ *       "html" = "Drupal\tabt\Handler\RouteProvider\TabtRouteProvider",
+ *     },
+ *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   base_table = "tabt_team",
  *   entity_keys = {
@@ -22,8 +26,9 @@ use Drupal\tabt\Util\Enum\Tabt;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "collection" = "/tabt/team/list",
- *   }
+ *     "canonical" = "/tabt/team/{tabt}",
+ *     "collection" = "/admin/tabt/team",
+ *   },
  * )
  */
 final class Team extends TabtEntityBase implements TeamInterface {

@@ -6,7 +6,6 @@ dependencies:
     - system.menu.admin
   module:
     - tabt
-    - tabt_sync
     - user
 id: tabt_team
 label: Team
@@ -482,16 +481,7 @@ display:
           plugin_id: standard
           required: false
       header: {  }
-      footer:
-        tabt_sync:
-          id: tabt_sync
-          table: views
-          field: tabt_sync
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: tabt_sync
-          empty: false
+      footer: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1

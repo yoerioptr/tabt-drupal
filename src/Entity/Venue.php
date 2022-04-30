@@ -10,14 +10,20 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   id = "tabt_venue",
  *   label = @Translation("Venue"),
  *   handlers = {
- *     "views_data" = "Drupal\views\EntityViewsData",
  *     "access" = "Drupal\tabt\Handler\Access\TabtAccessControlHandler",
+ *     "route_provider" = {
+ *       "html" = "Drupal\tabt\Handler\RouteProvider\TabtRouteProvider",
+ *     },
+ *     "views_data" = "Drupal\views\EntityViewsData",
  *   },
  *   base_table = "tabt_venue",
  *   entity_keys = {
  *     "id" = "tid",
  *     "label" = "title",
  *     "uuid" = "uuid",
+ *   },
+ *   links = {
+ *     "canonical" = "/tabt/venue/{tabt}",
  *   }
  * )
  */

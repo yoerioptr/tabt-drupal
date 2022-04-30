@@ -2,8 +2,8 @@
 
 namespace Drupal\tabt\Handler\ListBuilder;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\tabt\Entity\MemberInterface;
 
 final class MemberListBuilder extends EntityListBuilder {
 
@@ -17,7 +17,12 @@ final class MemberListBuilder extends EntityListBuilder {
     ] + parent::buildHeader();
   }
 
-  public function buildRow(MemberInterface $member): array {
+  /**
+   * @param \Drupal\tabt\Entity\MemberInterface $member
+   *
+   * @return array
+   */
+  public function buildRow(EntityInterface $member): array {
     return [
       'position' => $member->getPosition(),
       'unique_index' => $member->getUniqueIndex(),
