@@ -9,9 +9,10 @@
         "source": "https://cgit.drupalcode.org/tabt"
     },
     "require": {
-        "php": ">=7.4",
+        "ext-json": "*",
         "drupal/core": "^9.0 || ^10",
-        "yoerioptr/tabt-api-client": "^v2.0",
-        "ext-json": "*"
+        "drush/drush": "^10.0 || ^11.0",
+        "php": ">=7.4",
+        "yoerioptr/tabt-api-client": "^v2.0"
     }
 }
