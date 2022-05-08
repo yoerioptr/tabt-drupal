@@ -1,4 +1,9 @@
 services:
+  tabt_sync.syncer:
+    class: \Drupal\tabt_sync\TabtSyncer
+    arguments:
+      - '@event_dispatcher'
+
   # Data fetchers
   tabt_sync.data_fetcher.division:
     class: Drupal\tabt_sync\DataFetcher\DivisionDataFetcher
@@ -29,39 +34,10 @@ services:
       - '@tabt.repository.client.match'
 
   # Drush commands
-  tabt_sync.drush_command.sync.division:
-    class: Drupal\tabt_sync\Commands\SyncDivisionsCommand
+  tabt_sync.drush_command.sync:
+    class: Drupal\tabt_sync\Commands\SyncCommands
     arguments:
-      - '@event_dispatcher'
-      - '@tabt_sync.data_fetcher.division'
-    tags:
-      - { name: drush.command }
-  tabt_sync.drush_command.sync.member:
-    class: Drupal\tabt_sync\Commands\SyncMembersCommand
-    arguments:
-      - '@event_dispatcher'
-      - '@tabt_sync.data_fetcher.member'
-    tags:
-      - { name: drush.command }
-  tabt_sync.drush_command.sync.team:
-    class: Drupal\tabt_sync\Commands\SyncTeamsCommand
-    arguments:
-      - '@event_dispatcher'
-      - '@tabt_sync.data_fetcher.team'
-    tags:
-      - { name: drush.command }
-  tabt_sync.drush_command.sync.tournament:
-    class: Drupal\tabt_sync\Commands\SyncTournamentsCommand
-    arguments:
-      - '@event_dispatcher'
-      - '@tabt_sync.data_fetcher.tournament'
-    tags:
-      - { name: drush.command }
-  tabt_sync.drush_command.sync.venue:
-    class: Drupal\tabt_sync\Commands\SyncVenuesCommand
-    arguments:
-      - '@event_dispatcher'
-      - '@tabt_sync.data_fetcher.venue'
+      - '@tabt_sync.syncer'
     tags:
       - { name: drush.command }
 

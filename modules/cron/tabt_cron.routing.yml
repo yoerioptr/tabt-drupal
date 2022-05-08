@@ -1,7 +1,0 @@
-tabt_cron.settings.form:
-  path: '/admin/config/tabt/cron/settings'
-  defaults:
-    _form: Drupal\tabt\Form\TabtSettingsForm
-    _title: 'Settings'
-  requirements:
-    _permission: 'administer tabt settings'

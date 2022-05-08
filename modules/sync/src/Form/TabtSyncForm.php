@@ -4,26 +4,22 @@ namespace Drupal\tabt_sync\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\tabt_sync\DataFetcher\DataFetcherInterface;
+use Drupal\tabt_sync\Exception\NonSyncableTypeException;
+use Drupal\tabt_sync\TabtSyncerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class TabtSyncForm extends FormBase {
 
-  private EventDispatcherInterface $eventDispatcher;
+  private string $sync_type;
 
-  private string $syncEvent;
+  private TabtSyncerInterface $tabtSyncer;
 
-  private string $clearEvent;
-
-  private DataFetcherInterface $dataFetcher;
-
-  public function __construct(EventDispatcherInterface $eventDispatcher) {
-    $this->eventDispatcher = $eventDispatcher;
+  public function __construct(TabtSyncerInterface $tabtSyncer) {
+    $this->tabtSyncer = $tabtSyncer;
   }
 
   public static function create(ContainerInterface $container): TabtSyncForm {
-    return new TabtSyncForm($container->get('event_dispatcher'));
+    return new TabtSyncForm($container->get('tabt_sync.syncer'));
   }
 
   public function getFormId(): string {
@@ -33,45 +29,40 @@ final class TabtSyncForm extends FormBase {
   public function buildForm(
     array $form,
     FormStateInterface $form_state,
-    string $sync_event = '',
-    string $clear_event = '',
-    DataFetcherInterface $data_fetcher = NULL
+    string $sync_type = ''
   ): array {
-    $this->syncEvent = $sync_event;
-    $this->clearEvent = $clear_event;
-    $this->dataFetcher = $data_fetcher;
+    $this->sync_type = $sync_type;
 
-    if (!empty($this->syncEvent) && class_exists($this->syncEvent)) {
-      $form['sync'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Sync'),
-        '#attributes' => ['class' => ['button', 'button--primary']],
-        '#name' => 'sync',
-      ];
-    }
+    $form['sync'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Sync'),
+      '#attributes' => ['class' => ['button', 'button--primary']],
+      '#name' => 'sync',
+    ];
 
-    if (!empty($this->clearEvent) && class_exists($this->clearEvent)) {
-      $form['clear'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Clear'),
-        '#attributes' => ['class' => ['button', 'button--danger']],
-        '#name' => 'clear',
-      ];
-    }
+    $form['clear'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Clear'),
+      '#attributes' => ['class' => ['button', 'button--danger']],
+      '#name' => 'clear',
+    ];
 
     return $form;
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    switch ($form_state->getTriggeringElement()['#name']) {
-      case 'sync':
-        foreach ($this->dataFetcher->listItemsToSync() as $item) {
-          $this->eventDispatcher->dispatch(new $this->syncEvent($item));
-        }
-        break;
-      case 'clear':
-        $this->eventDispatcher->dispatch(new $this->clearEvent());
-        break;
+    try {
+      switch ($form_state->getTriggeringElement()['#name']) {
+        case 'sync':
+          $this->tabtSyncer->syncSingle($this->sync_type);
+          break;
+
+        case 'clear':
+          $this->tabtSyncer->truncateSingle($this->sync_type);
+          break;
+      }
+    } catch (NonSyncableTypeException $exception) {
+      // TODO: Display error message & logging
     }
   }
 
