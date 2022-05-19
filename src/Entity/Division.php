@@ -24,7 +24,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "canonical" = "/tabt/division/{tabt}",
+ *     "canonical" = "/tabt/division/{tabt_division}",
  *     "collection" = "/tabt/division/list",
  *   }
  * )

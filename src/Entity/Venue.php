@@ -23,7 +23,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "canonical" = "/tabt/venue/{tabt}",
+ *     "canonical" = "/tabt/venue/{tabt_venue}",
  *   }
  * )
  */

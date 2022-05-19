@@ -26,7 +26,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "canonical" = "/tabt/tournament/{tabt}",
+ *     "canonical" = "/tabt/tournament/{tabt_tournament}",
  *     "collection" = "/tabt/tournament/list",
  *   }
  * )

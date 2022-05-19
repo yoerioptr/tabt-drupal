@@ -26,7 +26,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "canonical" = "/tabt/team/{tabt}",
+ *     "canonical" = "/tabt/team/{tabt_team}",
  *     "collection" = "/admin/tabt/team",
  *   },
  * )
