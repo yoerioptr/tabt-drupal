@@ -30,6 +30,8 @@ final class Tournament extends SyncableItemBase {
 
   private ?string $venue;
 
+  private array $rawData;
+
   public function __construct(
     string $matchId,
     string $weekName,
@@ -43,7 +45,8 @@ final class Tournament extends SyncableItemBase {
     string $awayWithdrawn,
     int $divisionId,
     string $score,
-    ?string $venue
+    ?string $venue,
+    array $rawData
   ) {
     $this->matchId = $matchId;
     $this->weekName = $weekName;
@@ -58,6 +61,7 @@ final class Tournament extends SyncableItemBase {
     $this->awayWithdrawn = $awayWithdrawn;
     $this->score = $score;
     $this->venue = $venue;
+    $this->rawData = $rawData;
   }
 
   public function getAwayTeam(): string {
@@ -110,6 +114,10 @@ final class Tournament extends SyncableItemBase {
 
   public function getVenue(): ?string {
     return $this->venue;
+  }
+
+  public function getRawData(): array {
+    return $this->rawData;
   }
 
 }

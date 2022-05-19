@@ -50,6 +50,7 @@ final class SyncTournamentEventSubscriber implements EventSubscriberInterface {
     $tournament->set('week_name', $source->getWeekName());
     $tournament->set('score', $this->buildScore($source));
     $tournament->set('venue', $this->venueRepository->getVenueByName($source->getVenue() ?? ''));
+    $tournament->set('raw_data', json_encode($source->getRawData(), TRUE));
 
     $tournament->save();
   }

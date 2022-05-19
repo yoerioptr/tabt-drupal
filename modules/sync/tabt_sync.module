@@ -1,11 +1,6 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\tabt_sync\Event\Truncate\TruncateDivisionsEvent;
-use Drupal\tabt_sync\Event\Truncate\TruncateMembersEvent;
-use Drupal\tabt_sync\Event\Truncate\TruncateTeamsEvent;
-use Drupal\tabt_sync\Event\Truncate\TruncateTournamentsEvent;
-use Drupal\tabt_sync\Event\Truncate\TruncateVenuesEvent;
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -17,18 +12,9 @@ function tabt_sync_form_tabt_settings_form_alter(array &$form): void {
   ];
 
   $form['#submit'][] = function (array &$form, FormStateInterface $form_state): void {
-    if (!$form_state->getValue('truncate')) {
-      return;
+    if ($form_state->getValue('truncate')) {
+      Drupal::service('tabt_sync.syncer')->truncateAll();
     }
-
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher */
-    $eventDispatcher = Drupal::service('event_dispatcher');
-
-    $eventDispatcher->dispatch(new TruncateDivisionsEvent());
-    $eventDispatcher->dispatch(new TruncateMembersEvent());
-    $eventDispatcher->dispatch(new TruncateTeamsEvent());
-    $eventDispatcher->dispatch(new TruncateTournamentsEvent());
-    $eventDispatcher->dispatch(new TruncateVenuesEvent());
   };
 }
 

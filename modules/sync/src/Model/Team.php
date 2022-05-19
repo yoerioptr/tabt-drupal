@@ -12,16 +12,20 @@ final class Team extends SyncableItemBase {
 
   private bool $isExternal;
 
+  private array $rawData;
+
   public function __construct(
     string $team_id,
     string $team,
     int $division_id,
-    bool $isExternal
+    bool $isExternal,
+    array $rawData
   ) {
     $this->team_id = $team_id;
     $this->team = $team;
     $this->division_id = $division_id;
     $this->isExternal = $isExternal;
+    $this->rawData = $rawData;
   }
 
   public function getTeamId(): string {
@@ -38,6 +42,10 @@ final class Team extends SyncableItemBase {
 
   public function isExternal(): bool {
     return $this->isExternal;
+  }
+
+  public function getRawData(): array {
+    return $this->rawData;
   }
 
 }

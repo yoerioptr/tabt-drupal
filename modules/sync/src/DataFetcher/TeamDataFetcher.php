@@ -12,6 +12,8 @@ use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
 final class TeamDataFetcher implements DataFetcherInterface {
 
+  use RawDataTrait;
+
   private array $clubTeams = [];
 
   private ClubContext $clubContext;
@@ -94,7 +96,8 @@ final class TeamDataFetcher implements DataFetcherInterface {
         $team->getTeamId(),
         "{$club_entry->getName()} {$team->getTeam()}",
         $team->getDivisionId(),
-        $this->clubContext->getClub() !== $club_entry->getUniqueIndex()
+        $this->clubContext->getClub() !== $club_entry->getUniqueIndex(),
+        $this->getRawData($team)
       );
     }, $team_entries);
 
@@ -109,6 +112,13 @@ final class TeamDataFetcher implements DataFetcherInterface {
     }
 
     return NULL;
+  }
+
+  private function getCombinedRawData(TeamEntry $team_entry, ClubEntry $club_entry): array {
+    $raw_data = $this->getRawData($team_entry);
+    $raw_data['club'] = $this->getRawData($club_entry);
+
+    return $raw_data;
   }
 
 }

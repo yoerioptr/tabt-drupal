@@ -27,6 +27,7 @@ final class SyncMemberEventSubscriber implements EventSubscriberInterface {
     $member->set('last_name', $source->getLastName());
     $member->set('ranking', $source->getRanking());
     $member->set('ranking_index', $source->getRankingIndex());
+    $member->set('raw_data', json_encode($source->getRawData(), TRUE));
 
     $member->save();
   }

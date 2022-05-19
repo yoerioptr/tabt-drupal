@@ -10,14 +10,18 @@ final class Division extends SyncableItemBase {
 
   private string $divisionName;
 
+  private array $rawData;
+
   public function __construct(
     int $divisionId,
     int $divisionCategory,
-    string $divisionName
+    string $divisionName,
+    array $rawData
   ) {
     $this->divisionId = $divisionId;
     $this->divisionCategory = $divisionCategory;
     $this->divisionName = $divisionName;
+    $this->rawData = $rawData;
   }
 
   public function getDivisionId(): int {
@@ -30,6 +34,10 @@ final class Division extends SyncableItemBase {
 
   public function getDivisionName(): string {
     return $this->divisionName;
+  }
+
+  public function getRawData(): array {
+    return $this->rawData;
   }
 
 }

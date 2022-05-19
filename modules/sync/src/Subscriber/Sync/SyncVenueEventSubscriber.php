@@ -24,6 +24,7 @@ final class SyncVenueEventSubscriber implements EventSubscriberInterface {
     $venue->set('address', $this->buildAddress($source));
     $venue->set('description', $source->getComment());
     $venue->set('phone', $this->buildPhone($source));
+    $venue->set('raw_data', json_encode($source->getRawData(), TRUE));
 
     $venue->save();
   }

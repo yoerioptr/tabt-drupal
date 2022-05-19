@@ -22,6 +22,7 @@ final class SyncDivisionEventSubscriber implements EventSubscriberInterface {
     $division->set('title', $source->getDivisionName());
     $division->set('division_id', $source->getDivisionId());
     $division->set('division_category', $source->getDivisionCategory());
+    $division->set('raw_data', json_encode($source->getRawData(), TRUE));
 
     $division->save();
   }

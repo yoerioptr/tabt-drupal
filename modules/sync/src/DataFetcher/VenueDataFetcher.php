@@ -9,6 +9,8 @@ use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
 final class VenueDataFetcher implements DataFetcherInterface {
 
+  use RawDataTrait;
+
   private ClubContext $clubContext;
 
   private MatchRepository $matchRepository;
@@ -39,7 +41,8 @@ final class VenueDataFetcher implements DataFetcherInterface {
           $match->getVenueEntry()->getStreet(),
           $match->getVenueEntry()->getTown(),
           $match->getVenueEntry()->getPhone(),
-          $match->getVenueEntry()->getComment()
+          $match->getVenueEntry()->getComment(),
+          $this->getRawData($match->getVenueEntry())
         );
       }
     }

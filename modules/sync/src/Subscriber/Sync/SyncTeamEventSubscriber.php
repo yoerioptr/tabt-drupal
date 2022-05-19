@@ -30,6 +30,7 @@ final class SyncTeamEventSubscriber implements EventSubscriberInterface {
     $team->set('team_id', $source->getTeamId());
     $team->set('division', $this->divisionRepository->getDivisionByTabtId($source->getDivisionId()));
     $team->set('external', $source->isExternal());
+    $team->set('raw_data', json_encode($source->getRawData(), TRUE));
 
     $team->save();
   }

@@ -9,6 +9,8 @@ use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
 final class DivisionDataFetcher implements DataFetcherInterface {
 
+  use RawDataTrait;
+
   private ClubContext $clubContext;
 
   private MatchRepository $matchRepository;
@@ -42,10 +44,12 @@ final class DivisionDataFetcher implements DataFetcherInterface {
       $divisions[$division_id] = new Division(
         $division_id,
         $match_entry->getDivisionCategory(),
-        $response->getDivisionName()
+        $response->getDivisionName(),
+        $this->getRawData($match_entry)
       );
     }
 
-    return $divisions;  }
+    return $divisions;
+  }
 
 }

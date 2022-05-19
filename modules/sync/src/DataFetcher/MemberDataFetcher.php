@@ -9,6 +9,8 @@ use Yoerioptr\TabtApiClient\Repository\MemberRepository;
 
 final class MemberDataFetcher implements DataFetcherInterface {
 
+  use RawDataTrait;
+
   private ClubContext $clubContext;
 
   private MemberRepository $memberRepository;
@@ -33,7 +35,8 @@ final class MemberDataFetcher implements DataFetcherInterface {
         $member->getFirstName(),
         $member->getLastName(),
         $member->getRanking(),
-        $member->getRankingIndex()
+        $member->getRankingIndex(),
+        $this->getRawData($member)
       );
     }, $member_entries);
   }

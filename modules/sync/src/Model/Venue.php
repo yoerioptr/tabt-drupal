@@ -14,18 +14,22 @@ final class Venue extends SyncableItemBase {
 
   private string $comment;
 
+  private array $rawData;
+
   public function __construct(
     string $name,
     string $street,
     string $town,
     ?string $phone,
-    string $comment
+    string $comment,
+    array $rawData
   ) {
     $this->name = $name;
     $this->street = $street;
     $this->town = $town;
     $this->phone = $phone;
     $this->comment = $comment;
+    $this->rawData = $rawData;
   }
 
   public function getComment(): string {
@@ -46,6 +50,10 @@ final class Venue extends SyncableItemBase {
 
   public function getTown(): string {
     return $this->town;
+  }
+
+  public function getRawData(): array {
+    return $this->rawData;
   }
 
 }

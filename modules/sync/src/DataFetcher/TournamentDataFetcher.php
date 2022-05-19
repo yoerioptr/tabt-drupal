@@ -9,6 +9,8 @@ use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
 final class TournamentDataFetcher implements DataFetcherInterface {
 
+  use RawDataTrait;
+
   private ClubContext $clubContext;
 
   private MatchRepository $matchRepository;
@@ -40,7 +42,8 @@ final class TournamentDataFetcher implements DataFetcherInterface {
         $match->getAwayWithdrawn(),
         $match->getDivisionId(),
         $match->getScore(),
-        !is_null($match->getVenueEntry()) ? $match->getVenueEntry()->getName() : NULL
+        !is_null($match->getVenueEntry()) ? $match->getVenueEntry()->getName() : NULL,
+        $this->getRawData($match)
       );
     }, $match_entries);
   }
