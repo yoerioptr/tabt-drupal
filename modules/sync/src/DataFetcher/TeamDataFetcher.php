@@ -7,7 +7,6 @@ use Drupal\tabt_sync\Model\Team;
 use Yoerioptr\TabtApiClient\Entries\ClubEntry;
 use Yoerioptr\TabtApiClient\Entries\TeamEntry;
 use Yoerioptr\TabtApiClient\Repository\ClubRepository;
-use Yoerioptr\TabtApiClient\Repository\DivisionRepository;
 use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
 final class TeamDataFetcher implements DataFetcherInterface {
@@ -97,7 +96,7 @@ final class TeamDataFetcher implements DataFetcherInterface {
         "{$club_entry->getName()} {$team->getTeam()}",
         $team->getDivisionId(),
         $this->clubContext->getClub() !== $club_entry->getUniqueIndex(),
-        $this->getRawData($team)
+        $this->getCombinedRawData($team, $club_entry)
       );
     }, $team_entries);
 
