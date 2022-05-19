@@ -1,9 +1,4 @@
 services:
-  tabt_sync.syncer:
-    class: \Drupal\tabt_sync\TabtSyncer
-    arguments:
-      - '@event_dispatcher'
-
   # Data fetchers
   tabt_sync.data_fetcher.division:
     class: Drupal\tabt_sync\DataFetcher\DivisionDataFetcher
@@ -36,8 +31,6 @@ services:
   # Drush commands
   tabt_sync.drush_command.sync:
     class: Drupal\tabt_sync\Commands\SyncCommands
-    arguments:
-      - '@tabt_sync.syncer'
     tags:
       - { name: drush.command }
 

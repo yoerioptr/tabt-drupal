@@ -3,17 +3,10 @@
 namespace Drupal\tabt_sync\Commands;
 
 use Drupal\tabt_sync\Exception\NonSyncableTypeException;
-use Drupal\tabt_sync\TabtSyncerInterface;
+use Drupal\tabt_sync\TabtSyncer;
 use Drush\Commands\DrushCommands;
 
 final class SyncCommands extends DrushCommands {
-
-  private TabtSyncerInterface $tabtSyncer;
-
-  public function __construct(TabtSyncerInterface $tabtSyncer) {
-    parent::__construct();
-    $this->tabtSyncer = $tabtSyncer;
-  }
 
   /**
    * @command tabt:sync
@@ -22,13 +15,16 @@ final class SyncCommands extends DrushCommands {
    */
   public function sync(string $type = 'all'): void {
     if ($type === 'all') {
-      $this->tabtSyncer->syncAll();
+      TabtSyncer::syncAll();
+      drush_backend_batch_process();
+
       return;
     }
 
     try {
-      $this->tabtSyncer->syncSingle($type);
-    } catch (NonSyncableTypeException $exception) {
+      TabtSyncer::syncSingle($type);
+    }
+    catch (NonSyncableTypeException $exception) {
       // TODO: Display error message & logging
     }
   }
@@ -40,13 +36,16 @@ final class SyncCommands extends DrushCommands {
    */
   public function truncate(string $type = 'all'): void {
     if ($type === 'all') {
-      $this->tabtSyncer->truncateAll();
+      TabtSyncer::truncateAll();
+      drush_backend_batch_process();
+
       return;
     }
 
     try {
-      $this->tabtSyncer->truncateSingle($type);
-    } catch (NonSyncableTypeException $exception) {
+      TabtSyncer::truncateSingle($type);
+    }
+    catch (NonSyncableTypeException $exception) {
       // TODO: Display error message & logging
     }
   }
