@@ -30,6 +30,13 @@ final class TabtSyncer {
     $batch_builder->addOperation([self::class, 'syncSingle'], $types);
 
     batch_set($batch_builder->toArray());
+
+    if (PHP_SAPI === 'cli' && function_exists('drush_main')) {
+      drush_backend_batch_process();
+      return;
+    }
+
+    batch_process();
   }
 
   public static function syncSingle(string $type): void {
@@ -52,6 +59,13 @@ final class TabtSyncer {
     $batch_builder->addOperation([self::class, 'truncateSingle'], $types);
 
     batch_set($batch_builder->toArray());
+
+    if (PHP_SAPI === 'cli' && function_exists('drush_main')) {
+      drush_backend_batch_process();
+      return;
+    }
+
+    batch_process();
   }
 
   public static function truncateSingle(string $type): void {
@@ -60,7 +74,7 @@ final class TabtSyncer {
       throw new NonSyncableTypeException();
     }
 
-    \Drupal::service('event_dispatcher')->dispatch(new $event);
+    \Drupal::service('event_dispatcher')->dispatch(new $event());
   }
 
   private static function syncEventMapping(): array {
@@ -86,6 +100,7 @@ final class TabtSyncer {
   private static function getBatchBuilder(): BatchBuilder {
     $batch_builder = new BatchBuilder();
     $batch_builder->setTitle(random_bytes(10));
+    $batch_builder->setProgressive(FALSE);
 
     return $batch_builder;
   }

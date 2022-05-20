@@ -16,8 +16,6 @@ final class SyncCommands extends DrushCommands {
   public function sync(string $type = 'all'): void {
     if ($type === 'all') {
       TabtSyncer::syncAll();
-      drush_backend_batch_process();
-
       return;
     }
 
@@ -37,8 +35,6 @@ final class SyncCommands extends DrushCommands {
   public function truncate(string $type = 'all'): void {
     if ($type === 'all') {
       TabtSyncer::truncateAll();
-      drush_backend_batch_process();
-
       return;
     }
 
