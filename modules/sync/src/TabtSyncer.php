@@ -24,10 +24,11 @@ final class TabtSyncer {
   public const TYPE_TOURNAMENT = 'tournament';
 
   public static function syncAll(): void {
-    $types = array_keys(self::syncEventMapping());
-
     $batch_builder = self::getBatchBuilder();
-    $batch_builder->addOperation([self::class, 'syncSingle'], $types);
+
+    foreach (array_keys(self::syncEventMapping()) as $type) {
+      $batch_builder->addOperation([self::class, 'syncSingle'], [$type]);
+    }
 
     batch_set($batch_builder->toArray());
 
@@ -53,10 +54,11 @@ final class TabtSyncer {
   }
 
   public static function truncateAll(): void {
-    $types = array_keys(self::truncateEventMapping());
-
     $batch_builder = self::getBatchBuilder();
-    $batch_builder->addOperation([self::class, 'truncateSingle'], $types);
+
+    foreach (array_keys(self::truncateEventMapping()) as $type) {
+      $batch_builder->addOperation([self::class, 'truncateSingle'], [$type]);
+    }
 
     batch_set($batch_builder->toArray());
 
@@ -99,7 +101,7 @@ final class TabtSyncer {
 
   private static function getBatchBuilder(): BatchBuilder {
     $batch_builder = new BatchBuilder();
-    $batch_builder->setTitle(random_bytes(10));
+    $batch_builder->setTitle('tabt_sync_' . time());
     $batch_builder->setProgressive(FALSE);
 
     return $batch_builder;
