@@ -15,7 +15,7 @@ use Drupal\tabt_sync\Event\Truncate\TruncateTournamentsEvent;
 use Drupal\tabt_sync\Event\Truncate\TruncateVenuesEvent;
 use Drupal\tabt_sync\Exception\NonSyncableTypeException;
 
-final class TabtSyncer {
+final class SyncCommands {
 
   public const TYPE_DIVISION = 'division';
   public const TYPE_MEMBER = 'member';
