@@ -5,3 +5,6 @@ tabt.settings:
     club:
       type: string
       label: 'Club'
+    season:
+      type: string
+      label: 'Season'
