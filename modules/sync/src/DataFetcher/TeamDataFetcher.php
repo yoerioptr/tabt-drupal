@@ -3,7 +3,6 @@
 namespace Drupal\tabt_sync\DataFetcher;
 
 use Drupal\tabt\Context\ClubContext;
-use Drupal\tabt\Context\SeasonContext;
 use Drupal\tabt_sync\Model\Team;
 use Yoerioptr\TabtApiClient\Entries\ClubEntry;
 use Yoerioptr\TabtApiClient\Entries\TeamEntry;
@@ -18,20 +17,16 @@ final class TeamDataFetcher implements DataFetcherInterface {
 
   private ClubContext $clubContext;
 
-  private SeasonContext $seasonContext;
-
   private ClubRepository $clubRepository;
 
   private MatchRepository $matchRepository;
 
   public function __construct(
     ClubContext $clubContext,
-    SeasonContext $seasonContext,
     ClubRepository $clubRepository,
     MatchRepository $matchRepository
   ) {
     $this->clubContext = $clubContext;
-    $this->seasonContext = $seasonContext;
     $this->clubRepository = $clubRepository;
     $this->matchRepository = $matchRepository;
   }
@@ -61,10 +56,9 @@ final class TeamDataFetcher implements DataFetcherInterface {
   }
 
   private function getTeamsForDivisions(array $division_ids): array {
-    $match_entries = $this->matchRepository->listMatchesBy([
-      'Club' => $this->clubContext->getClub(),
-      'Season' => $this->seasonContext->getSeason(),
-    ])->getTeamMatchesEntries();
+    $match_entries = $this->matchRepository
+      ->listMatchesByClub($this->clubContext->getClub())
+      ->getTeamMatchesEntries();
 
     $teams = [];
     foreach ($match_entries as $match_entry) {
@@ -86,10 +80,9 @@ final class TeamDataFetcher implements DataFetcherInterface {
       return [];
     }
 
-    $team_entries = $this->clubRepository->listTeamsBy([
-      'Club' => $club,
-      'Season' => $this->seasonContext->getSeason(),
-    ])->getTeamEntries();
+    $team_entries = $this->clubRepository
+      ->listTeamsByClub($club)
+      ->getTeamEntries();
 
     if (!is_null($division_ids)) {
       $team_entries = array_filter($team_entries, function (TeamEntry $team) use ($division_ids): bool {
@@ -111,11 +104,7 @@ final class TeamDataFetcher implements DataFetcherInterface {
   }
 
   private function getClubEntry(string $club): ?ClubEntry {
-    $club_entries = $this->clubRepository->listClubsBy([
-      'Season' => $this->seasonContext->getSeason(),
-    ])->getClubEntries();
-
-    foreach ($club_entries as $club_entry) {
+    foreach ($this->clubRepository->listClubs()->getClubEntries() as $club_entry) {
       if ($club_entry->getUniqueIndex() === $club) {
         return $club_entry;
       }

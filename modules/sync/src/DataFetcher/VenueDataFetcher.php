@@ -3,7 +3,6 @@
 namespace Drupal\tabt_sync\DataFetcher;
 
 use Drupal\tabt\Context\ClubContext;
-use Drupal\tabt\Context\SeasonContext;
 use Drupal\tabt_sync\Model\Venue;
 use Yoerioptr\TabtApiClient\Entries\TeamMatchesEntry;
 use Yoerioptr\TabtApiClient\Repository\MatchRepository;
@@ -14,27 +13,22 @@ final class VenueDataFetcher implements DataFetcherInterface {
 
   private ClubContext $clubContext;
 
-  private SeasonContext $seasonContext;
-
   private MatchRepository $matchRepository;
 
   public function __construct(
     ClubContext $clubContext,
-    SeasonContext $seasonContext,
     MatchRepository $matchRepository
   ) {
     $this->clubContext = $clubContext;
-    $this->seasonContext = $seasonContext;
     $this->matchRepository = $matchRepository;
   }
 
   public function listItemsToSync(): array {
     $venues = [];
 
-    $match_entries = $this->matchRepository->listMatchesBy([
-      'Club' => $this->clubContext->getClub(),
-      'Season' => $this->seasonContext->getSeason(),
-    ])->getTeamMatchesEntries();
+    $match_entries = $this->matchRepository
+      ->listMatchesByClub($this->clubContext->getClub())
+      ->getTeamMatchesEntries();
 
     $match_entries = array_filter($match_entries, function (TeamMatchesEntry $match): bool {
       return !is_null($match->getVenueEntry());

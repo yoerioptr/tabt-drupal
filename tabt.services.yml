@@ -4,11 +4,6 @@ services:
     class: Drupal\tabt\Context\ClubContext
     arguments:
       - '@config.factory'
-  tabt.context.season:
-    class: Drupal\tabt\Context\SeasonContext
-    arguments:
-      - '@config.factory'
-      - '@tabt.repository.client.season'
 
   # Repositories
   tabt.repository.division:

@@ -1,0 +1,45 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\tabt\Entity\MemberInterface;
+use Drupal\tabt\Entity\TeamInterface;
+use Drupal\tabt\Entity\TournamentInterface;
+
+/**
+ * Implements hook_entity_operation().
+ */
+function tabt_team_management_entity_operation(EntityInterface $entity): array {
+  $operations = [];
+
+  if ($entity instanceof TournamentInterface) {
+    $operations['manage_team'] = [
+      'title' => t('Manage team'),
+      'url' => Url::fromRoute('entity.tabt.tournament.manage_team', ['tournament' => $entity->id()]),
+      'weight' => -1,
+    ];
+  }
+
+  return $operations;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function tabt_team_management_tabt_member_delete(MemberInterface $member): void {
+  // TODO: Remove member from team setup.
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function tabt_team_management_tabt_team_delete(TeamInterface $team): void {
+  // TODO: Remove all setups linked to this team.
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function tabt_team_management_tabt_tournament_delete(TournamentInterface $tournament): void {
+  // TODO: Remove all setups linked to this tournament.
+}

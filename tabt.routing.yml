@@ -1,7 +1,7 @@
 tabt.config:
   path: '/admin/config/tabt'
   defaults:
-    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _controller: 'Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: 'Tabt'
   requirements:
     _permission: 'administer tabt settings'
@@ -17,7 +17,7 @@ tabt.config.settings_form:
 tabt:
   path: '/admin/tabt'
   defaults:
-    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _controller: 'Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
     _title: 'Tabt'
   requirements:
     _permission: 'administer tabt settings'

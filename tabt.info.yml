@@ -1,4 +1,4 @@
-name: 'Tabt'
+name: 'TabT'
 type: module
 description: 'Core TabT table tennis manager functionality.'
 package: tabt

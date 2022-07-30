@@ -1,0 +1,11 @@
+entity.tabt.tournament.manage_team:
+  path: '/admin/tabt/tournament/{tournament}/manage_team'
+  defaults:
+    _form: Drupal\tabt_team_management\Form\TournamentTeamManagementForm
+    _title_callback: 'Drupal\Core\Entity\Controller\EntityController::title'
+  options:
+    parameters:
+      tournament:
+        type: entity:tabt_tournament
+  requirements:
+    _permission: 'manage team players'

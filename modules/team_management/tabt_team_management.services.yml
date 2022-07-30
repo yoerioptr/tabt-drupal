@@ -1,0 +1,3 @@
+services:
+  tabt_team_management.helper.player_availability_checker:
+    class: Drupal\tabt_team_management\Helper\PlayerAvailability\PlayerAvailabilityChecker

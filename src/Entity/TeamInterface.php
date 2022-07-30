@@ -8,4 +8,6 @@ interface TeamInterface extends ContentEntityInterface {
 
   public function getTeamId(): string;
 
+  public function isExternal(): bool;
+
 }
