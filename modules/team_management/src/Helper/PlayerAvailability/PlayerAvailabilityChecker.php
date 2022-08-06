@@ -8,14 +8,36 @@ use Drupal\tabt\Entity\MemberInterface;
 use Drupal\tabt\Entity\Team;
 use Drupal\tabt\Entity\TeamInterface;
 use Drupal\tabt\Entity\TournamentInterface;
+use Drupal\tabt_team_management\Entity\TeamSetupInterface;
+use Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface;
 
 final class PlayerAvailabilityChecker implements PlayerAvailabilityCheckerInterface {
+
+  private TeamSetupRepositoryInterface $teamSetupRepository;
+
+  public function __construct(TeamSetupRepositoryInterface $teamSetupRepository) {
+    $this->teamSetupRepository = $teamSetupRepository;
+  }
 
   public function checkPlayerAvailability(
     MemberInterface $member,
     TournamentInterface $tournament,
     TeamInterface $team
   ): int {
+    $setups_containing_player = array_filter(
+      $this->teamSetupRepository->listSetupsByMemberAndWeekName($member, $tournament->getWeekName()),
+      function (TeamSetupInterface $setup) use ($tournament): bool {
+        return $setup->getTournament()->id() !== $tournament->id();
+      }
+    );
+
+    if (!empty($setups_containing_player)) {
+      return PlayerAvailabilityCheckerInterface::OCCUPIED;
+    }
+
+    // TODO: Implement PlayerAvailabilityCheckerInterface::CONFLICTED_RANKING check
+    // TODO: Implement PlayerAvailabilityCheckerInterface::UNAVAILABLE check
+
     return PlayerAvailabilityCheckerInterface::AVAILABLE;
   }
 

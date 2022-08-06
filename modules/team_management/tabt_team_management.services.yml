@@ -1,3 +1,16 @@
 services:
-  tabt_team_management.helper.player_availability_checker:
+  tabt.helper.player_availability_checker:
     class: Drupal\tabt_team_management\Helper\PlayerAvailability\PlayerAvailabilityChecker
+    arguments:
+      - '@tabt.repository.team_setup'
+
+  tabt.repository.team_setup:
+    class: Drupal\tabt_team_management\Repository\TeamSetupRepository
+    arguments:
+      - '@entity_type.manager'
+
+  tabt.autocomplete_matcher.player:
+    class: Drupal\tabt_team_management\PlayerAutocompleteMatcher
+    arguments:
+      - '@plugin.manager.entity_reference_selection'
+      - '@tabt.helper.player_availability_checker'

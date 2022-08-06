@@ -5,6 +5,7 @@ use Drupal\Core\Url;
 use Drupal\tabt\Entity\MemberInterface;
 use Drupal\tabt\Entity\TeamInterface;
 use Drupal\tabt\Entity\TournamentInterface;
+use Drupal\tabt_team_management\Entity\TeamSetupInterface;
 
 /**
  * Implements hook_entity_operation().
@@ -24,22 +25,54 @@ function tabt_team_management_entity_operation(EntityInterface $entity): array {
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function tabt_team_management_tabt_team_setup_presave(TeamSetupInterface $setup): void {
+  $players = $setup->getPlayers();
+
+  // Sort players based on ranking index
+  usort($players, function (MemberInterface $m1, MemberInterface $m2): int {
+    return (int)$m1->getRankingIndex() <=> $m2->getRankingIndex();
+  });
+
+  $setup->set('members', $players);
+}
+
+/**
  * Implements hook_ENTITY_TYPE_delete().
  */
 function tabt_team_management_tabt_member_delete(MemberInterface $member): void {
-  // TODO: Remove member from team setup.
+  /** @var \Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface $team_setup_repository */
+  $team_setup_repository = Drupal::service('tabt.repository.team_setup');
+
+  /** @var \Drupal\tabt_team_management\Entity\TeamSetupInterface $setup */
+  foreach ($team_setup_repository->listSetupsByMember($member) as $setup) {
+    $setup->removePlayer($member);
+  }
 }
 
 /**
  * Implements hook_ENTITY_TYPE_delete().
  */
 function tabt_team_management_tabt_team_delete(TeamInterface $team): void {
-  // TODO: Remove all setups linked to this team.
+  /** @var \Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface $team_setup_repository */
+  $team_setup_repository = Drupal::service('tabt.repository.team_setup');
+
+  /** @var \Drupal\tabt_team_management\Entity\TeamSetupInterface $setup */
+  foreach ($team_setup_repository->listSetupsByTeam($team) as $setup) {
+    $setup->delete();
+  }
 }
 
 /**
  * Implements hook_ENTITY_TYPE_delete().
  */
 function tabt_team_management_tabt_tournament_delete(TournamentInterface $tournament): void {
-  // TODO: Remove all setups linked to this tournament.
+  /** @var \Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface $team_setup_repository */
+  $team_setup_repository = Drupal::service('tabt.repository.team_setup');
+
+  /** @var \Drupal\tabt_team_management\Entity\TeamSetupInterface $setup */
+  foreach ($team_setup_repository->listSetupsByTournament($tournament) as $setup) {
+    $setup->delete();
+  }
 }

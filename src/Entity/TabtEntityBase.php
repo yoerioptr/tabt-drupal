@@ -16,10 +16,6 @@ abstract class TabtEntityBase extends ContentEntityBase implements TabtEntityInt
     return $this->get('uuid')->value;
   }
 
-  public function label(): string {
-    return $this->get('title')->value;
-  }
-
   public function getRawData(): string {
     return $this->get('raw_data')->value;
   }

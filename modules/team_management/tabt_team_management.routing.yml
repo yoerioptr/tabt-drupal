@@ -9,3 +9,16 @@ entity.tabt.tournament.manage_team:
         type: entity:tabt_tournament
   requirements:
     _permission: 'manage team players'
+
+tabt_team_management.entity_autocomplete.player:
+  path: '/player_autocomplete/{tournament}/{team}/{selection_settings_key}'
+  defaults:
+    _controller: Drupal\tabt_team_management\Controller\PlayerAutocompleteController
+  options:
+    parameters:
+      tournament:
+        type: entity:tabt_tournament
+      team:
+        type: entity:tabt_team
+  requirements:
+    _access: 'TRUE'
