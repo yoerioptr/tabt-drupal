@@ -39,7 +39,7 @@ final class DivisionDataFetcher implements DataFetcherInterface {
         continue;
       }
 
-      $response = $this->divisionRepository->listDivisionsRankingByDivisionId($division_id);
+      $response = $this->divisionRepository->listDivisionRankingByDivisionId($division_id);
 
       $divisions[$division_id] = new Division(
         $division_id,
