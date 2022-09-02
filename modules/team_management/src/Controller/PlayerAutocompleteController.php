@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-final class PlayerAutocompleteController extends EntityAutocompleteController {
+class PlayerAutocompleteController extends EntityAutocompleteController {
 
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('tabt.autocomplete_matcher.player'),
       $container->get('keyvalue')->get('entity_autocomplete')

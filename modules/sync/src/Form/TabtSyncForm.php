@@ -7,9 +7,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\tabt_sync\Exception\NonSyncableTypeException;
 use Drupal\tabt_sync\TabtSyncer;
 
-final class TabtSyncForm extends FormBase {
+class TabtSyncForm extends FormBase {
 
-  private string $sync_type;
+  protected string $sync_type;
 
   public function getFormId(): string {
     return 'tabt_sync_form';

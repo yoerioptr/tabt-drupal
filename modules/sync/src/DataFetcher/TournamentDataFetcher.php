@@ -7,13 +7,13 @@ use Drupal\tabt_sync\Model\Tournament;
 use Yoerioptr\TabtApiClient\Entries\TeamMatchesEntry;
 use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
-final class TournamentDataFetcher implements DataFetcherInterface {
+class TournamentDataFetcher implements DataFetcherInterface {
 
   use RawDataTrait;
 
-  private ClubContext $clubContext;
+  protected ClubContext $clubContext;
 
-  private MatchRepository $matchRepository;
+  protected MatchRepository $matchRepository;
 
   public function __construct(
     ClubContext $clubContext,

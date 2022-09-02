@@ -6,7 +6,7 @@ use Drupal\tabt_sync\Exception\NonSyncableTypeException;
 use Drupal\tabt_sync\TabtSyncer;
 use Drush\Commands\DrushCommands;
 
-final class SyncCommands extends DrushCommands {
+class SyncCommands extends DrushCommands {
 
   /**
    * @command tabt:sync

@@ -8,9 +8,9 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * @FormElement("player_autocomplete")
  */
-final class PlayerAutocomplete extends EntityAutocomplete {
+class PlayerAutocomplete extends EntityAutocomplete {
 
-  public function getInfo() {
+  public function getInfo(): array {
     $info = parent::getInfo();
     $info['#target_type'] = 'tabt_member';
 

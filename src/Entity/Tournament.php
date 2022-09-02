@@ -31,7 +31,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   }
  * )
  */
-final class Tournament extends TabtEntityBase implements TournamentInterface {
+class Tournament extends TabtEntityBase implements TournamentInterface {
 
   public function getTournamentId(): string {
     return $this->get('tournament_id')->value;

@@ -9,7 +9,7 @@ use Drupal\tabt\Repository\RepositoryBase;
 use Drupal\tabt_team_management\Entity\TeamSetup;
 use Drupal\tabt_team_management\Entity\TeamSetupInterface;
 
-final class TeamSetupRepository extends RepositoryBase implements TeamSetupRepositoryInterface {
+class TeamSetupRepository extends RepositoryBase implements TeamSetupRepositoryInterface {
 
   public function getSetup(TournamentInterface $tournament, TeamInterface $team): ?TeamSetupInterface {
     $query = $this->baseEntityQuery();

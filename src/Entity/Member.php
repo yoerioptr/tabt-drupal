@@ -29,7 +29,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  * )
  */
-final class Member extends TabtEntityBase implements MemberInterface {
+class Member extends TabtEntityBase implements MemberInterface {
 
   public function getPosition(): int {
     return $this->get('position')->value;

@@ -5,7 +5,7 @@ namespace Drupal\tabt\Handler\ListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 
-final class TournamentListBuilder extends EntityListBuilder {
+class TournamentListBuilder extends EntityListBuilder {
 
   public function buildHeader(): array {
     return [

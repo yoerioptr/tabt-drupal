@@ -8,7 +8,7 @@ use Drupal\tabt\Entity\Tournament;
 use Drupal\tabt\Entity\TournamentInterface;
 use Drupal\tabt\Util\Enum\Tabt;
 
-final class TournamentRepository extends RepositoryBase implements TournamentRepositoryInterface {
+class TournamentRepository extends RepositoryBase implements TournamentRepositoryInterface {
 
   protected function entityTypeId(): string {
     return Tabt::TOURNAMENT;

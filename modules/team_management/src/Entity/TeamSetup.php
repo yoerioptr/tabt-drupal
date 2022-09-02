@@ -24,9 +24,9 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   },
  * )
  */
-final class TeamSetup extends ContentEntityBase implements TeamSetupInterface {
+class TeamSetup extends ContentEntityBase implements TeamSetupInterface {
 
-  public function label() {
+  public function label(): string {
     return $this->id();
   }
 
@@ -51,7 +51,7 @@ final class TeamSetup extends ContentEntityBase implements TeamSetupInterface {
   }
 
   public function removePlayer(MemberInterface $member): void {
-
+    // TODO: Implement method.
   }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
@@ -68,24 +68,24 @@ final class TeamSetup extends ContentEntityBase implements TeamSetupInterface {
       ->setReadOnly(TRUE);
 
     $fields['tournament'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the entity.'))
+      ->setLabel(t('Tournament'))
+      ->setDescription(t('The tournament of the setup.'))
       ->setRequired(TRUE)
       ->setTargetEntityTypeId(Tabt::TOURNAMENT)
       ->setSetting('target_type', Tabt::TOURNAMENT)
       ->setSetting('handler', 'default');
 
     $fields['team'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the entity.'))
+      ->setLabel(t('Team'))
+      ->setDescription(t('The team of the setup.'))
       ->setRequired(TRUE)
       ->setTargetEntityTypeId(Tabt::TEAM)
       ->setSetting('target_type', Tabt::TEAM)
       ->setSetting('handler', 'default');
 
     $fields['members'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the entity.'))
+      ->setLabel(t('Members'))
+      ->setDescription(t('The members of the setup.'))
       ->setTargetEntityTypeId(Tabt::MEMBER)
       ->setCardinality(4)
       ->setSetting('target_type', Tabt::MEMBER)

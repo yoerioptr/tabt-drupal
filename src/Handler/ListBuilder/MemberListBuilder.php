@@ -5,7 +5,7 @@ namespace Drupal\tabt\Handler\ListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 
-final class MemberListBuilder extends EntityListBuilder {
+class MemberListBuilder extends EntityListBuilder {
 
   public function buildHeader(): array {
     return [

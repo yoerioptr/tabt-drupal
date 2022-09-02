@@ -10,11 +10,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Yoerioptr\TabtApiClient\Entries\ClubEntry;
 use Yoerioptr\TabtApiClient\Repository\ClubRepository;
 
-final class TabtSettingsForm extends ConfigFormBase {
+class TabtSettingsForm extends ConfigFormBase {
 
   public const FORM_ID = 'tabt_settings_form';
 
-  private ClubRepository $clubRepository;
+  protected ClubRepository $clubRepository;
 
   public function __construct(
     ConfigFactoryInterface $config_factory,

@@ -5,7 +5,7 @@ namespace Drupal\tabt_team_management\Helper\PlayerAvailability;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\tabt\Entity\MemberInterface;
 
-final class PlayerAvailabilityMessage {
+class PlayerAvailabilityMessage {
 
   public static function playerDuplicateMessage(MemberInterface $member): TranslatableMarkup {
     return t('%player cannot participate twice in the same tournament.', ['%player' => $member->label()]);

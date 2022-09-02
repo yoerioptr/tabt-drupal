@@ -6,7 +6,7 @@ use Drupal\tabt\Entity\Member;
 use Drupal\tabt\Entity\MemberInterface;
 use Drupal\tabt\Util\Enum\Tabt;
 
-final class MemberRepository extends RepositoryBase implements MemberRepositoryInterface {
+class MemberRepository extends RepositoryBase implements MemberRepositoryInterface {
 
   protected function entityTypeId(): string {
     return Tabt::MEMBER;

@@ -14,9 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ViewsArea("tabt_sync")
  */
-final class SyncTabtViewsArea extends AreaPluginBase {
+class SyncTabtViewsArea extends AreaPluginBase {
 
-  private FormBuilderInterface $formBuilder;
+  protected FormBuilderInterface $formBuilder;
 
   public function __construct(
     array $configuration,
@@ -33,8 +33,8 @@ final class SyncTabtViewsArea extends AreaPluginBase {
     array $configuration,
     $plugin_id,
     $plugin_definition
-  ): SyncTabtViewsArea {
-    return new SyncTabtViewsArea(
+  ): static {
+    return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,

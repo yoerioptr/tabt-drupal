@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\tabt\Entity\TabtEntityInterface;
 
-final class TabtAccessControlHandler extends EntityAccessControlHandler {
+class TabtAccessControlHandler extends EntityAccessControlHandler {
 
   /**
    * @param \Drupal\tabt\Entity\TabtEntityInterface $entity

@@ -11,9 +11,9 @@ use Drupal\tabt\Entity\TournamentInterface;
 use Drupal\tabt_team_management\Entity\TeamSetupInterface;
 use Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface;
 
-final class PlayerAvailabilityChecker implements PlayerAvailabilityCheckerInterface {
+class PlayerAvailabilityChecker implements PlayerAvailabilityCheckerInterface {
 
-  private TeamSetupRepositoryInterface $teamSetupRepository;
+  protected TeamSetupRepositoryInterface $teamSetupRepository;
 
   public function __construct(TeamSetupRepositoryInterface $teamSetupRepository) {
     $this->teamSetupRepository = $teamSetupRepository;
@@ -69,13 +69,13 @@ final class PlayerAvailabilityChecker implements PlayerAvailabilityCheckerInterf
             $form_state->setError($form['teams'][$team_id]['players'][$player_index], PlayerAvailabilityMessage::playerOccupiedMessage($member));
             break;
 
-          case PlayerAvailabilityCheckerInterface::CONFLICTED_RANKING:
-            $form_state->setError($form['teams'][$team_id]['players'][$player_index], PlayerAvailabilityMessage::playerRankingConflictMessage($member));
-            break;
+          //case PlayerAvailabilityCheckerInterface::CONFLICTED_RANKING:
+          //  $form_state->setError($form['teams'][$team_id]['players'][$player_index], PlayerAvailabilityMessage::playerRankingConflictMessage($member));
+          //  break;
 
-          case PlayerAvailabilityCheckerInterface::UNAVAILABLE:
-            $form_state->setError($form['teams'][$team_id]['players'][$player_index], PlayerAvailabilityMessage::playerUnavailableMessage($member));
-            break;
+          //case PlayerAvailabilityCheckerInterface::UNAVAILABLE:
+          //  $form_state->setError($form['teams'][$team_id]['players'][$player_index], PlayerAvailabilityMessage::playerUnavailableMessage($member));
+          //  break;
         }
       }
     }

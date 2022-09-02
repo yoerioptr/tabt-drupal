@@ -11,8 +11,8 @@ interface PlayerAvailabilityCheckerInterface {
 
   public const AVAILABLE = 1;
   public const OCCUPIED = 2;
-  public const CONFLICTED_RANKING = 3;
-  public const UNAVAILABLE = 4;
+  // public const CONFLICTED_RANKING = 3;
+  // public const UNAVAILABLE = 4;
 
   public function checkPlayerAvailability(
     MemberInterface $member,

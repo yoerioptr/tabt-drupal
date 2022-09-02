@@ -6,7 +6,7 @@ use Drupal\tabt\Entity\Team;
 use Drupal\tabt\Entity\TeamInterface;
 use Drupal\tabt\Util\Enum\Tabt;
 
-final class TeamRepository extends RepositoryBase implements TeamRepositoryInterface {
+class TeamRepository extends RepositoryBase implements TeamRepositoryInterface {
 
   protected function entityTypeId(): string {
     return Tabt::TEAM;

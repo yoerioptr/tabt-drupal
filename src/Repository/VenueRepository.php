@@ -6,7 +6,7 @@ use Drupal\tabt\Entity\Venue;
 use Drupal\tabt\Entity\VenueInterface;
 use Drupal\tabt\Util\Enum\Tabt;
 
-final class VenueRepository extends RepositoryBase implements VenueRepositoryInterface {
+class VenueRepository extends RepositoryBase implements VenueRepositoryInterface {
 
   protected function entityTypeId(): string {
     return Tabt::VENUE;

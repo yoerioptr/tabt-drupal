@@ -13,13 +13,13 @@ use Drupal\tabt_team_management\Helper\PlayerAvailability\PlayerAvailabilityChec
 use Drupal\tabt_team_management\Repository\TeamSetupRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-final class TournamentTeamManagementForm extends FormBase {
+class TournamentTeamManagementForm extends FormBase {
 
-  private ?TournamentInterface $tournament = NULL;
+  protected ?TournamentInterface $tournament = NULL;
 
-  private PlayerAvailabilityCheckerInterface $playerAvailabilityChecker;
+  protected PlayerAvailabilityCheckerInterface $playerAvailabilityChecker;
 
-  private TeamSetupRepositoryInterface $teamSetupRepository;
+  protected TeamSetupRepositoryInterface $teamSetupRepository;
 
   public function __construct(
     PlayerAvailabilityCheckerInterface $playerAvailabilityChecker,
@@ -29,8 +29,8 @@ final class TournamentTeamManagementForm extends FormBase {
     $this->teamSetupRepository = $teamSetupRepository;
   }
 
-  public static function create(ContainerInterface $container): self {
-    return new self(
+  public static function create(ContainerInterface $container): static {
+    return new static(
       $container->get('tabt.helper.player_availability_checker'),
       $container->get('tabt.repository.team_setup')
     );

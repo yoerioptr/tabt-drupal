@@ -6,7 +6,7 @@ use Drupal\tabt\Entity\Division;
 use Drupal\tabt\Entity\DivisionInterface;
 use Drupal\tabt\Util\Enum\Tabt;
 
-final class DivisionRepository extends RepositoryBase implements DivisionRepositoryInterface {
+class DivisionRepository extends RepositoryBase implements DivisionRepositoryInterface {
 
   protected function entityTypeId(): string {
     return Tabt::DIVISION;

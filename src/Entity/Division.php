@@ -29,7 +29,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   }
  * )
  */
-final class Division extends TabtEntityBase implements DivisionInterface {
+class Division extends TabtEntityBase implements DivisionInterface {
 
   public function getDivisionId(): int {
     return $this->get('division_id')->value;

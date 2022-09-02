@@ -7,13 +7,13 @@ use Drupal\tabt_sync\Model\Member;
 use Yoerioptr\TabtApiClient\Entries\MemberEntry;
 use Yoerioptr\TabtApiClient\Repository\MemberRepository;
 
-final class MemberDataFetcher implements DataFetcherInterface {
+class MemberDataFetcher implements DataFetcherInterface {
 
   use RawDataTrait;
 
-  private ClubContext $clubContext;
+  protected ClubContext $clubContext;
 
-  private MemberRepository $memberRepository;
+  protected MemberRepository $memberRepository;
 
   public function __construct(
     ClubContext $clubContext,

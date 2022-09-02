@@ -11,9 +11,9 @@ use Drupal\tabt\Entity\TeamInterface;
 use Drupal\tabt\Entity\TournamentInterface;
 use Drupal\tabt_team_management\Helper\PlayerAvailability\PlayerAvailabilityCheckerInterface;
 
-final class PlayerAutocompleteMatcher extends EntityAutocompleteMatcher {
+class PlayerAutocompleteMatcher extends EntityAutocompleteMatcher {
 
-  private PlayerAvailabilityCheckerInterface $playerAvailabilityChecker;
+  protected PlayerAvailabilityCheckerInterface $playerAvailabilityChecker;
 
   public function __construct(
     SelectionPluginManagerInterface $selection_manager,

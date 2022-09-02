@@ -9,17 +9,17 @@ use Yoerioptr\TabtApiClient\Entries\TeamEntry;
 use Yoerioptr\TabtApiClient\Repository\ClubRepository;
 use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
-final class TeamDataFetcher implements DataFetcherInterface {
+class TeamDataFetcher implements DataFetcherInterface {
 
   use RawDataTrait;
 
-  private array $clubTeams = [];
+  protected array $clubTeams = [];
 
-  private ClubContext $clubContext;
+  protected ClubContext $clubContext;
 
-  private ClubRepository $clubRepository;
+  protected ClubRepository $clubRepository;
 
-  private MatchRepository $matchRepository;
+  protected MatchRepository $matchRepository;
 
   public function __construct(
     ClubContext $clubContext,

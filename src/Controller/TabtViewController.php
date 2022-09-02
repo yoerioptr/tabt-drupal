@@ -7,7 +7,7 @@ use Drupal\tabt\Entity\TabtEntityInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class TabtViewController extends EntityViewController {
+class TabtViewController extends EntityViewController {
 
   public function __invoke(Request $request, string $view_mode = 'full'): array {
     return $this->view($this->extractEntityFromRequest($request), $view_mode);

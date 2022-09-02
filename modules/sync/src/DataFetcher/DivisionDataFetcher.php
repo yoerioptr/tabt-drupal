@@ -7,15 +7,15 @@ use Drupal\tabt_sync\Model\Division;
 use Yoerioptr\TabtApiClient\Repository\DivisionRepository;
 use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 
-final class DivisionDataFetcher implements DataFetcherInterface {
+class DivisionDataFetcher implements DataFetcherInterface {
 
   use RawDataTrait;
 
-  private ClubContext $clubContext;
+  protected ClubContext $clubContext;
 
-  private MatchRepository $matchRepository;
+  protected MatchRepository $matchRepository;
 
-  private DivisionRepository $divisionRepository;
+  protected DivisionRepository $divisionRepository;
 
   public function __construct(
     ClubContext $clubContext,

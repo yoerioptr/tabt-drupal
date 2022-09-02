@@ -7,7 +7,7 @@ use Drupal\Core\Entity\Routing\EntityRouteProviderInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-final class TabtRouteProvider implements EntityRouteProviderInterface {
+class TabtRouteProvider implements EntityRouteProviderInterface {
 
   public function getRoutes(EntityTypeInterface $entity_type): RouteCollection {
     $route_collection = new RouteCollection();

@@ -31,7 +31,7 @@ use Drupal\tabt\Util\Enum\Tabt;
  *   },
  * )
  */
-final class Team extends TabtEntityBase implements TeamInterface {
+class Team extends TabtEntityBase implements TeamInterface {
 
   public function getTeamId(): string {
     return $this->get('team_id')->value;
